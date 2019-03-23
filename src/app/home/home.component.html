@@ -44,18 +44,7 @@
       <div class="card mb-4" *ngFor="let event of events">
         
         <img class="card-img-top" src="./assets/robot.jpeg" width="300px" alt="Card image cap">
-        <div class="card-img-overlay" style="padding:0px;">
-          <div class="float-right hidden-md-up rounded" style="background-color: rgb(240, 241, 242)">
-            <div class="text-center">
-              <i class="btn text-warning fa fa-bookmark fa-2x"></i>
-              <!-- <i *ngSwitchCase="false" (click)="bookmark()" class="btn text-warning far fa-bookmark fa-2x"></i> -->
-            </div>
-            <div class="text-center">
-              <i class="btn text-danger fa fa-heart fa-2x"></i>
-              <!-- <i *ngSwitchCase="false" (click)="like()" class="btn text-danger far fa-heart fa-2x"></i> -->
-            </div>
-          </div>
-        </div>
+
         <div class="card-img-overlay">
           <span class="badge badge-primary"> Free food </span>
           <span class="badge badge-secondary"> Books </span>
@@ -66,6 +55,20 @@
           <span class="badge badge-light"> Job Opportunity </span>
           <span class="badge badge-dark"> Etc </span>
         </div>
+        <div class="card-img-overlay" style="padding:0px;">
+            <div class="float-right hidden-md-up rounded" style="background-color: rgb(240, 241, 242)">
+              <div class="text-center">
+                <i 
+                [ngClass]="event.isBookmarked ? 'btn text-warning fa fa-bookmark fa-2x' : 'btn text-warning far fa-bookmark fa-2x'"
+               (click)="bookmark(event)"></i>
+                <!-- <i *ngSwitchCase="false" (click)="bookmark()" class="btn text-warning far fa-bookmark fa-2x"></i> -->
+              </div>
+              <div class="text-center">
+                <i class="btn text-danger far fa-heart fa-2x"></i>
+                <!-- <i *ngSwitchCase="false" (click)="like()" class="btn text-danger far fa-heart fa-2x"></i> -->
+              </div>
+            </div>
+          </div>
         <div class="card card-body">
 
           <h2 class="card-title">Post Title</h2>
