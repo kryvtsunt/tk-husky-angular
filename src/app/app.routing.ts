@@ -15,6 +15,7 @@ const appRoutes: Routes = [
   { path: 'event', component: EventComponent},
   { path: 'profile', component: ProfileComponent},
   { path: 'organization', component: OrganizationComponent},
+  { path: 'organization/:orgId', component: OrganizationComponent},
    { path: 'event/:eventId', component: EventComponent },
   { path: '**', component: HomeComponent},
 ];

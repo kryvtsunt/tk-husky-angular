@@ -23,6 +23,8 @@ export class EventComponent implements OnInit {
 
     this.eventService.findEvent(this.eventId)
       .then(event => {
+        //TODO: event.isBookmarked = invoke bookmark service
+        event.isBookmarked = false;
         console.log(event);
         this.event = event;
         console.log(this.event);
