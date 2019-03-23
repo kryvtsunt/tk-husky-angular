@@ -13,6 +13,13 @@ import {UserServiceClient} from "./services/user.service.client";
 import { ProfileComponent } from './profile/profile.component';
 import { EventComponent } from './event/event.component';
 import { OrganizationComponent } from './organization/organization.component';
+import { EventServiceClient } from './services/event.service.client';
+import { ActivityServiceClient } from './services/activity.service.client';
+import { BookmarkServiceClient } from './services/bookmark.service.client';
+import { CommentServiceClient } from './services/comment.service.client';
+import { FollowServiceClient } from './services/follow.service.client';
+import { LikeServiceClient } from './services/like.service.client';
+import { OrgServiceClient } from './services/org.service.client';
 
 @NgModule({
   declarations: [
@@ -31,7 +38,14 @@ import { OrganizationComponent } from './organization/organization.component';
     HttpClientModule,
     routing
   ],
-  providers: [UserServiceClient],
+  providers: [UserServiceClient,
+    EventServiceClient,
+    ActivityServiceClient,
+    BookmarkServiceClient,
+    CommentServiceClient,
+    FollowServiceClient,
+    LikeServiceClient,
+    OrgServiceClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

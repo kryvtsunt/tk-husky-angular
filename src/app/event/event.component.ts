@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { EventServiceClient } from '../services/event.service.client';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-event',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventComponent implements OnInit {
 
-  constructor() { }
+  constructor(private eventService: EventServiceClient,private activatedRoute: ActivatedRoute) { }
+
+  eventId : String;
+  event: {};
 
   ngOnInit() {
+
+    this.activatedRoute.params.subscribe(params => {
+      this.eventId = params['eventId'];
+    });
+   console.log(this.eventId);
+
+    this.eventService.findEvent(this.eventId)
+      .then(event => {
+        console.log(event);
+        this.event = event;
+        console.log(this.event);
+      });
   }
 
 }

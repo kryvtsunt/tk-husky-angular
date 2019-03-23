@@ -2,13 +2,13 @@
 import {Injectable} from '@angular/core';
 
 const HOST = 'https://huskyneighborhood.herokuapp.com/';
-// const HOST = 'http://localhost:4000/';
+//const HOST = 'http://localhost:4000/';
 
 @Injectable()
 export class EventServiceClient {
 
   findEvent(EventId) {
-    return fetch(HOST + 'api/HNbhood/Event/' + EventId, {
+    return fetch(HOST + 'api/HNbhood/' + EventId, {
       method: 'get',
       headers: {
         'content-type': 'application/json'
