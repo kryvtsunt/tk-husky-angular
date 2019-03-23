@@ -11,6 +11,8 @@ import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
 import {UserServiceClient} from "./services/user.service.client";
 import { ProfileComponent } from './profile/profile.component';
+import { EventComponent } from './event/event.component';
+import { OrganizationComponent } from './organization/organization.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { ProfileComponent } from './profile/profile.component';
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
+    EventComponent,
+    OrganizationComponent,
   ],
   imports: [
     BrowserModule,

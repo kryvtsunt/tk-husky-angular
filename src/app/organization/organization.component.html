@@ -1,0 +1,196 @@
+
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="events.html">Husky Neighborhood</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="./events.html">Events
+          </a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Profile<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./index.html">Log out</a>
+        </li>
+        <!-- <li class="nav-item">
+<a class="nav-link" href="#">Contact</a>
+</li> -->
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container emp-profile">
+  <form method="post">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="profile-img">
+          <img src="img/books.jpg" alt="" />
+          <div class="file btn btn-lg btn-primary">
+            Change Photo
+            <input type="file" name="file" />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="profile-head">
+          <h5>
+            Fiction Addiction Book Club
+          </h5>
+          <h6>
+            A Club for Bookworms!
+          </h6>
+
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                 aria-controls="home" aria-selected="true">About</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" />
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="profile-work">
+          <ul class="list-group">
+            <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
+
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span>
+              13</li>
+
+            <li class="list-group-item text-right"><span
+              class="pull-left"><strong>Followers</strong></span> 78</li>
+          </ul>
+          <hr />
+          <div style="word-break: break-all; word-wrap: break-word;">
+            <p>WEBSITE</p>
+            <a
+              href="https://www.facebook.com/NEUFictionAddiction/">https://www.facebook.com/NEUFictionAddiction/</a><br />
+          </div>
+          <!-- <p>SKILLS</p>
+                <a href="">Web Designer</a><br/>
+                <a href="">Web Developer</a><br/>
+                <a href="">WordPress</a><br/>
+                <a href="">WooCommerce</a><br/>
+                <a href="">PHP, .Net</a><br/> -->
+          <hr />
+
+        </div>
+      </div>
+
+      <div class="col-md-8">
+        <div class="tab-content profile-tab" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+            <div class="row">
+
+              <div class="col-md-12">
+                <p style="color:black">Fiction Addiction is a book club for all Northeastern
+                  students. We plan on
+                  reading one work a month and having bi-monthly meetings to discuss it. Contrary
+                  to the name of the club, we will not be limiting ourselves to fiction. Votes
+                  will be cast by all members of the club to determine what we read each month. We
+                  also anticipate holding fun events for members, such as bringing local authors
+                  in to speak about their books or participating in activities related to the
+                  books we are reading. This club is for anyone who has an interest in reading or
+                  enjoys discussing literary topics with others.</p>
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <div class="col-md-6">
+                <label>Email</label>
+              </div>
+              <div class="col-md-6">
+                <p>NEUFictionAddiction@gmail.com</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Phone</label>
+              </div>
+              <div class="col-md-6">
+                <p>123 456 7890</p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+        <br />
+        <br />
+        <div class="col-md-5 float-right mr-0">
+          <!-- <input onclick="window.location='post-event.html';" type="submit" class="profile-edit-btn float-right" name="btnAddMore" value="Post New Event" /> -->
+          <a href="event-edit.html" class="btn btn-success float-right"> Post New Event </a>
+        </div>
+        <br />
+        <br />
+
+
+        <ul class="nav nav-tabs" id="eventsTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="events-tab" data-toggle="tab" href="#home" role="tab"
+               aria-controls="home" aria-selected="true">Upcoming Events</a>
+          </li>
+        </ul>
+        <br />
+        <div class="card w-41 flex-row">
+          <div class="card-header border-0">
+            <img class="img-fluid" src="img/book-love.jpeg" alt="img">
+          </div>
+
+          <div class="card-body col-md-8">
+            <h5 class="card-title">Blind Date with a Book</h5>
+            <p class="card-text">Don't judge a book by its cover. Put your trust in fate and buy a book
+              without knowing the title, maybe you will fall in love!</p>
+            <a href="event-edit.html" class="btn btn-primary">Edit</a>
+            <button type="button" onclick="confirmDelete()" class="btn btn-danger">Delete </button>
+          </div>
+        </div>
+
+        <br />
+        <div class="card w-41 flex-row">
+          <div class="card-header border-0">
+            <img class="img-fluid" src="img/robot.jpeg" alt="img">
+          </div>
+
+          <div class="card-body col-md-8">
+            <h5 class="card-title">Ready Player One Movie Night</h5>
+            <p class="card-text">Watch the movie in 3D with us.</p>
+            <a href="event-edit.html" class="btn btn-primary">Edit</a>
+            <button type="button" onclick="confirmDelete()" class="btn btn-danger">Delete </button>
+          </div>
+        </div>
+
+        <br />
+        <div class="card w-41 flex-row">
+          <div class="card-header border-0">
+            <img class="img-fluid" src="img/library.jpeg" alt="img">
+          </div>
+
+          <div class="card-body col-md-6">
+            <h5 class="card-title">Library Tour</h5>
+            <p class="card-text">Come with us on a tour of the Boston Public Library.</p>
+            <a href="event-edit.html" class="btn btn-primary">Edit</a>
+            <button type="button" onclick="confirmDelete()" class="btn btn-danger">Delete </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </form>
+</div>
