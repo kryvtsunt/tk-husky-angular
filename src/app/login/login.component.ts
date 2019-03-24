@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
 
 
   login() {
+    console.log("inside login");
     this.resetErrors();
     if (this.username === '') {
       this.noUsernameError = true;

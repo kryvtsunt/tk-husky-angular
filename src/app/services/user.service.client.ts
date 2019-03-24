@@ -28,7 +28,7 @@ export class UserServiceClient {
       username: username,
       password: password
     };
-    return fetch(HOST + 'api/login', {
+    return fetch(HOST + 'api/HNbhood/login', {
       method: 'post',
       body: JSON.stringify(credentials),
       credentials: 'include',
@@ -53,7 +53,7 @@ export class UserServiceClient {
   }
 
   logout() {
-    return fetch(HOST + 'api/logout', {
+    return fetch(HOST + 'api/HNbhood/logout', {
       method: 'post',
       credentials: 'include'
     });
@@ -71,7 +71,7 @@ export class UserServiceClient {
   }
 
   profile() {
-    return fetch(HOST + 'api/user',
+    return fetch(HOST + 'api/HNbhood/profile',
       {
         credentials: 'include'
       })
