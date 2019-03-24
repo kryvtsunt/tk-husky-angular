@@ -46,8 +46,13 @@ export class HomeComponent implements OnInit {
   bookmark = event => {
     event.isBookmarked = !event.isBookmarked;
     console.log(event);
-    //TODO: invoke DATABASE
-   // this.router.navigate(['/event/' + eventId]);
+    //TODO: uncomment code to invoke DATABASE
+  //  if(event.isBookmarked){
+  //     this.bookmarkService.bookmark(event);
+  //   }
+  //   else{
+  //     this.bookmarkService.unbookmark(event);
+  //   }
   }
 
 

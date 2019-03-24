@@ -44,7 +44,8 @@
           <div class="float-right hidden-md-up rounded"
                style="background-color: rgb(240, 241, 242)">
             <div class="text-center">
-              <i   [ngClass]="event.isBookmarked ? 'btn text-warning fa fa-bookmark fa-2x' : 'btn text-warning far fa-bookmark fa-2x'"></i>
+              <i   [ngClass]="event.isBookmarked ? 'btn text-warning fa fa-bookmark fa-2x' : 'btn text-warning far fa-bookmark fa-2x'"
+              (click)="bookmark(event)"></i>
               <!-- <i *ngSwitchCase="false" (click)="bookmark()" class="btn text-warning far fa-bookmark fa-2x"></i> -->
             </div>
             <div  class="text-center">
