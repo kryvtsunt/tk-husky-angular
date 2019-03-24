@@ -53,6 +53,7 @@ export class UserServiceClient {
   }
 
   logout() {
+    
     return fetch(HOST + 'api/HNbhood/logout', {
       method: 'post',
       credentials: 'include'
