@@ -43,7 +43,7 @@
 
       <div class="card mb-4" *ngFor="let event of events">
         
-        <img class="card-img-top" src="./assets/robot.jpeg" width="300px" alt="Card image cap">
+        <img class="card-img-top" src="./assets/robot.jpeg"  width="300px" alt="Card image cap">
 
         <div class="card-img-overlay">
           <span class="badge badge-primary"> Free food </span>
@@ -71,17 +71,15 @@
           </div>
         <div class="card card-body">
 
-          <h2 class="card-title">Post Title</h2>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque,
-            nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus
-            possimus, veniam magni quis!</p>
+          <h2 class="card-title">{{event.title}}</h2>
+          <p class="card-text">{{event.description}}</p>
             <div>
               <button type="button" class="btn btn-primary" (click)="viewEvent(event._id)">Read More &rarr;</button>
             </div>
            </div>
 
         <div class="card card-footer text-muted">
-          Posted on January 1, 2019 by
+          Posted on {{event.last_upd_date | date:'medium'}} by
           <a href="./organization.html">Fiction Addiction Book Club</a>
         </div>
       </div>

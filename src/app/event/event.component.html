@@ -56,10 +56,10 @@
         </div>
         <div class="card-body">
 
-          <h2 class="card-title">Event Name</h2>
-          <p class="card-text">Event details - a paragraph decribing the event.
-          <p> WHERE? Curry Student Center
-          <p> WHEN? 12PM, Wednesday, March 9, 2019.
+          <h2 class="card-title">{{event.title}}</h2>
+          <p class="card-text">{{event.description}}
+          <p> WHERE? {{event.venue}}
+          <p> WHEN? {{event.start_time}} to {{event.end_time}}
             <!-- <a href="#" class="btn btn-primary">Read More &rarr;</a> -->
         </div>
       </div>
