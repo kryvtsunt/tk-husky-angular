@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EventServiceClient } from '../services/event.service.client';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BookmarkServiceClient } from '../services/bookmark.service.client';
+import { UserServiceClient } from '../services/user.service.client';
 
 @Component({
   selector: 'app-event',
@@ -10,7 +11,11 @@ import { BookmarkServiceClient } from '../services/bookmark.service.client';
 })
 export class EventComponent implements OnInit {
 
-  constructor(private eventService: EventServiceClient,private bookmarkService:BookmarkServiceClient,private activatedRoute: ActivatedRoute) { }
+  constructor(private eventService: EventServiceClient,
+    private bookmarkService:BookmarkServiceClient,
+    private userService:UserServiceClient,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,) { }
 
   eventId : String;
   event: {};
@@ -32,6 +37,12 @@ export class EventComponent implements OnInit {
       });
   }
 
+  logout= () => {
+    console.log("in logout")
+    this.userService.logout().then(()=> {
+      this.router.navigate(['login']);
+    });
+  }
 
   bookmark = event => {
     event.isBookmarked = !event.isBookmarked;

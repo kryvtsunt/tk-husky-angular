@@ -14,13 +14,13 @@
       <form>
         <div class="form-group">
           <label>User Name</label>
-          <input type="text" class="form-control" placeholder="User Name">
+          <input type="text" class="form-control" placeholder="User Name" name="username" [(ngModel)]="username" required>
         </div>
         <div class="form-group">
           <label>Password</label>
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password" class="form-control" placeholder="Password" name="password" [(ngModel)]="password" required>
         </div>
-        <a href="events.html" type="submit" class="btn btn-black">Login</a>
+        <a href="events.html" type="submit" class="btn btn-black" (click)="login()" >Login</a>
         <a href="events.html" type="submit" class="btn btn-secondary">Register</a>
       </form>
     </div>
