@@ -7,6 +7,7 @@ const HOST = 'https://huskyneighborhood.herokuapp.com/';
 export class BookmarkServiceClient {
 
   bookmark(event) {
+    console.log("invoking bookmark service");
     return fetch(HOST + 'api/HNbhood/bookmark/event', {
       body: JSON.stringify(event),
       credentials: 'include', // include, same-origin, *omit
@@ -14,11 +15,13 @@ export class BookmarkServiceClient {
       headers: {
         'content-type': 'application/json'
       }
+    }).then(response => {
+      return response.json();
     });
   }
 
   unbookmark(event) {
-    return fetch(HOST + 'api/HNbhood/bookmark/event', {
+    return fetch(HOST + 'api/HNbhood/bookmark/event/' + event._id, {
       body: JSON.stringify(event),
       credentials: 'include', // include, same-origin, *omit
       method: 'delete',

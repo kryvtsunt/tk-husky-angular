@@ -21,7 +21,12 @@ export class HomeComponent implements OnInit {
       .then(events => {
 
         events.forEach(event => {
-          event.isBookmarked = true;
+          this.bookmarkService.checkBookmark(event._id).then((response)=>{
+            console.log(event._id);
+            console.log(response);
+            event.isBookmarked = response;
+          } );
+          
         });
         console.log(events);
         this.events = events;
@@ -44,15 +49,19 @@ export class HomeComponent implements OnInit {
   }
 
   bookmark = event => {
-    event.isBookmarked = !event.isBookmarked;
+    //event.isBookmarked = !event.isBookmarked;
     console.log(event);
-    //TODO: uncomment code to invoke DATABASE
-  //  if(event.isBookmarked){
-  //     this.bookmarkService.bookmark(event);
-  //   }
-  //   else{
-  //     this.bookmarkService.unbookmark(event);
-  //   }
+   // TODO: uncomment code to invoke DATABASE
+   if(event.isBookmarked){
+      this.bookmarkService.unbookmark(event).then((response)=>{
+        console.log(response);
+      });
+    }
+    else{
+      this.bookmarkService.bookmark(event).then((response)=>{
+        console.log(response);
+      });
+    }
   }
 
   logout= () => {
