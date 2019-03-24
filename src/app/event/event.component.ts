@@ -38,7 +38,7 @@ export class EventComponent implements OnInit {
   }
 
   logout= () => {
-    console.log("in logout")
+  
     this.userService.logout().then(()=> {
       this.router.navigate(['login']);
     });
