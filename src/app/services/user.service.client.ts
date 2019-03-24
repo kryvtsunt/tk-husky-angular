@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 
-// const HOST = 'https://tk-map-nodejs.herokuapp.com/';
-const HOST = 'http://localhost:4000/';
+ const HOST = 'https://huskyneighborhood.herokuapp.com/';
+//const HOST = 'http://localhost:4000/';
 
 @Injectable()
 export class UserServiceClient {
   findUserByUsername(username) {
-    return fetch(HOST + 'api/user/username/' + username)
+    return fetch(HOST + 'api/HNbhood/user/username/' + username)
       .then(response => response.json());
   }
 
@@ -60,7 +60,7 @@ export class UserServiceClient {
   }
 
   register(user) {
-    return fetch(HOST + 'api/register', {
+    return fetch(HOST + 'api/HNbhood/register', {
       body: JSON.stringify(user),
       credentials: 'include',
       method: 'post',
