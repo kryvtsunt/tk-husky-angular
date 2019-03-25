@@ -30,11 +30,11 @@ export class LoginComponent implements OnInit {
   login() {
     
     this.resetErrors();
-    if (this.username === '') {
+    if (this.username.trim() === '') {
       this.noUsernameError = true;
       
     } else {
-      if (this.password === '') {
+      if (this.password.trim() === '') {
         this.noPasswordError = true;
       } else {
         this.service.login(this.username, this.password)
