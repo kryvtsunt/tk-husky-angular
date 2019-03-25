@@ -42,13 +42,13 @@ export class RegisterComponent implements OnInit {
   register() {
     console.log("inside register");
     this.resetErrors();
-    if (this.username === '') {
+    if (this.username.trim() === '') {
       this.noUsernameError = true;
     } else {
-      if (this.password === '') {
+      if (this.password.trim() === '') {
         this.noPasswordError = true;
       } else {
-        if (this.password2 === '') {
+        if (this.password2.trim() === '') {
           this.noPassword2Error = true;
         } else {
           if (this.password === this.password2) {

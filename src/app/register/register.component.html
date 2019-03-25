@@ -13,6 +13,26 @@
 <div class="main">
   <div class="col-md-6 col-sm-12">
     <div class="login-form">
+
+        <div>
+
+            <div *ngIf="usernameError">
+              <p>Username unavailable. Please try another one.</p>
+            </div>
+            <div *ngIf="noUsernameError">
+              <p> Please enter a username. </p>
+            </div>
+            <div *ngIf="noPasswordError">
+              <p> Please enter a password. </p>
+            </div>
+            <div *ngIf="noPassword2Error">
+                <p> Please reconfirm your password. </p>
+              </div>
+              <div *ngIf="passwordError">
+                  <p> Passwords do not match. </p>
+                </div>
+          </div>
+
       <form #regform="ngForm" (ngSubmit)="register(regform)" >
         <div class="form-group">
           <label>User Name</label>
