@@ -102,3 +102,7 @@ li {
 .bookmarked p{
   color: #818182;
 }
+
+.bookmarked img{
+  width: 250px;
+}
