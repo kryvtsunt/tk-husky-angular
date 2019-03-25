@@ -12,8 +12,9 @@ body{
   text-align: center;
 }
 .profile-img img{
-  width: 70%;
+  width: 80%;
   height: 100%;
+  border-radius: 10%;
 }
 .profile-img .file {
   position: relative;
@@ -77,12 +78,12 @@ body{
   font-weight: 600;
   margin-top: 10%;
 }
-.profile-work a{
+.profile-work li{
   text-decoration: none;
   color: #495057;
   font-weight: 600;
   font-size: 14px;
-}h
+}
 .profile-work ul{
   list-style: none;
 }
@@ -91,5 +92,13 @@ body{
 }
 .profile-tab p{
   font-weight: 600;
-  color: #0062cc;
+  color: #008080;
+}
+
+li {
+  margin: 5px;
+}
+
+.bookmarked p{
+  color: #818182;
 }

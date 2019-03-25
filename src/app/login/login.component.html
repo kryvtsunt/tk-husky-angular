@@ -20,8 +20,10 @@
           <label>Password</label>
           <input type="password" class="form-control" placeholder="Password" name="password" [(ngModel)]="password" required>
         </div>
-        <a href="events.html" type="submit" class="btn btn-black" (click)="login()" >Login</a>
-        <a href="events.html" type="submit" class="btn btn-secondary">Register</a>
+        <span>
+          <button type="submit" class="btn btn-black" (click) ="login()">Login </button>
+          <a style="margin-left: 20px;" routerLink="../login"> Register </a>
+        </span>
       </form>
     </div>
   </div>

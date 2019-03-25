@@ -16,3 +16,7 @@
 #myBtn:hover {
   background-color: #555;
 }
+
+span {
+  margin: 5px;
+}

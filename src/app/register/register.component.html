@@ -4,7 +4,7 @@
     <p>Login or register from here to access.</p>
     <br/>
 
-    <img src="paw2.jpg" width="150px" style="border-radius: 50%;">
+    <img src="assets/paw2.jpg" width="150px" style="border-radius: 50%;">
 
   </div>
 </div>
@@ -28,8 +28,12 @@
           <label>Verify Password</label>
           <input type="password" class="form-control" placeholder="Password" name ="password2" [(ngModel)]="password2" required>
         </div>
-        <a type="submit" class="btn btn-black" (click) ="register()">Register</a>
+        <span>
+          <button type="submit" class="btn btn-black" (click) ="register()">Register </button>
+          <a style="margin-left: 20px;" routerLink="../login"> Login </a>
+        </span>
       </form>
+
     </div>
   </div>
 </div>
