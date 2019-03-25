@@ -50,16 +50,15 @@ export class HomeComponent implements OnInit {
 
   bookmark = event => {
     //event.isBookmarked = !event.isBookmarked;
-    console.log(event);
-   // TODO: uncomment code to invoke DATABASE
+   
    if(event.isBookmarked){
       this.bookmarkService.unbookmark(event).then((response)=>{
-        console.log(response);
+        event.isBookmarked = false;
       });
     }
     else{
       this.bookmarkService.bookmark(event).then((response)=>{
-        console.log(response);
+        event.isBookmarked = true;
       });
     }
   }
