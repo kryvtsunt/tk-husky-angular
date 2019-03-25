@@ -19,6 +19,21 @@ export class EventServiceClient {
       });
   }
 
+  createEvent(toCreateEvent) {
+
+    console.log()
+    return fetch(HOST + 'api/HNbhood/user/1/event', {
+      method: 'post',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(toCreateEvent)
+    })
+      .then(response => {
+        return response.json();
+      });
+  }
+
   deleteEvent(EventId) {
     return fetch(HOST + 'api/HNbhood/Event/' + EventId, {
       method: 'delete',

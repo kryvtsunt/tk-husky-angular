@@ -20,6 +20,7 @@ import { CommentServiceClient } from './services/comment.service.client';
 import { FollowServiceClient } from './services/follow.service.client';
 import { LikeServiceClient } from './services/like.service.client';
 import { OrgServiceClient } from './services/org.service.client';
+import { EventEditComponent } from './event-edit/event-edit.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { OrgServiceClient } from './services/org.service.client';
     ProfileComponent,
     EventComponent,
     OrganizationComponent,
+    EventEditComponent,
   ],
   imports: [
     BrowserModule,
