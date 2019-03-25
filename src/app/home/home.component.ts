@@ -16,7 +16,7 @@ import { BookmarkServiceClient } from '../services/bookmark.service.client';
 
 export class HomeComponent implements OnInit {
   ngOnInit(): void {
-    
+
     this.eventService.findAllEvents()
       .then(events => {
 
@@ -26,15 +26,15 @@ export class HomeComponent implements OnInit {
             console.log(response);
             event.isBookmarked = response;
           } );
-          
+
         });
         console.log(events);
         this.events = events;
       });
   }
 
-  constructor(private userService: UserServiceClient, 
-    private router: Router, 
+  constructor(private userService: UserServiceClient,
+    private router: Router,
     private eventService: EventServiceClient,
     private bookmarkService: BookmarkServiceClient
     ) {
@@ -65,10 +65,15 @@ export class HomeComponent implements OnInit {
   }
 
   logout= () => {
-   
+
     this.userService.logout().then(()=> {
       this.router.navigate(['login']);
     });
+  }
+
+  topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
 
 

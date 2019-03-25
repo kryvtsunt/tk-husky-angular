@@ -4,7 +4,7 @@
     <img src="./assets/paws.png" width="40px" style="border-radius: 20%; margin-right : 20px">
     <a class="navbar-brand" href="#">Husky Neighborhood</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -36,13 +36,19 @@
     <!-- Blog Entries Column -->
     <div class="col-md-8">
 
-      <h1 class="my-4">Event List
-        <!-- <small>Secondary Text</small> -->
-      </h1>
+      <br/>
+      <div class="d-flex justify-content-end">
+        <div class="btn-group">
+          <button type="button" class="btn btn-default btn-filter">All</button>
+          <button type="button" class="btn btn-secondary btn-filter">Relevant</button>
+          <button type="button" class="btn btn-default btn-filter">Upcoming</button>
+        </div>
+      </div>
+      <br/>
 
 
       <div class="card mb-4" *ngFor="let event of events">
-        
+
         <img class="card-img-top" src="./assets/robot.jpeg"  width="300px" alt="Card image cap">
 
         <div class="card-img-overlay">
@@ -56,27 +62,27 @@
           <span class="badge badge-dark"> Etc </span>
         </div>
         <div class="card-img-overlay" style="padding:0px;">
-            <div class="float-right hidden-md-up rounded" style="background-color: rgb(240, 241, 242)">
-              <div class="text-center">
-                <i 
+          <div class="float-right hidden-md-up rounded" style="background-color: rgb(240, 241, 242)">
+            <div class="text-center">
+              <i
                 [ngClass]="event.isBookmarked ? 'btn text-warning fa fa-bookmark fa-2x' : 'btn text-warning far fa-bookmark fa-2x'"
-               (click)="bookmark(event)"></i>
-                <!-- <i *ngSwitchCase="false" (click)="bookmark()" class="btn text-warning far fa-bookmark fa-2x"></i> -->
-              </div>
-              <div class="text-center">
-                <i class="btn text-danger far fa-heart fa-2x"></i>
-                <!-- <i *ngSwitchCase="false" (click)="like()" class="btn text-danger far fa-heart fa-2x"></i> -->
-              </div>
+                (click)="bookmark(event)"></i>
+              <!-- <i *ngSwitchCase="false" (click)="bookmark()" class="btn text-warning far fa-bookmark fa-2x"></i> -->
+            </div>
+            <div class="text-center">
+              <i class="btn text-danger far fa-heart fa-2x"></i>
+              <!-- <i *ngSwitchCase="false" (click)="like()" class="btn text-danger far fa-heart fa-2x"></i> -->
             </div>
           </div>
+        </div>
         <div class="card card-body">
 
           <h2 class="card-title">{{event.title}}</h2>
           <p class="card-text">{{event.description}}</p>
-            <div>
-              <button type="button" class="btn btn-primary" (click)="viewEvent(event._id)">Read More &rarr;</button>
-            </div>
-           </div>
+          <div>
+            <button type="button" class="btn btn-primary" (click)="viewEvent(event._id)">Read More &rarr;</button>
+          </div>
+        </div>
 
         <div class="card card-footer text-muted">
           Posted on {{event.last_upd_date | date:'medium'}} by
@@ -87,6 +93,70 @@
       <!-- Blog Post -->
 
 
+    </div>
+
+    <div class="col-md-4">
+      <!-- Search Widget -->
+      <div class="card my-4">
+        <h5 class="card-header">Search by Word</h5>
+        <div class="card-body">
+
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Input the word to search">
+            <span class="input-group-btn">
+                <button class="btn btn-secondary" type="button">Go</button>
+              </span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="card my-4">
+        <h5 class="card-header">Search by Date</h5>
+        <div class="card-body">
+          <div class="input-group">
+            <input type="date" class="form-control" name="date" id="date"
+                   title="enter date">
+            <span class="input-group-btn">
+                <button class="btn btn-secondary" type="button">Go</button>
+              </span>
+          </div>
+
+
+        </div>
+
+      </div>
+
+      <!-- Categories Widget -->
+      <div class="card my-4">
+        <h5 class="card-header">Search by Tags</h5>
+        <div class="card-body">
+          <div class="input-group">
+            <input type="text" class="form-control" disabled>
+            <span class="input-group-btn">
+                <button class="btn btn-secondary" type="button">Go</button>
+              </span>
+          </div>
+          <br/>
+
+          <div class="row">
+            <div class="col-lg-12">
+              <ul class="list-unstyled mb-0">
+                <li class="btn badge badge-success"> Free food </li>
+                <hr/>
+                <li class="btn badge badge-dark"> Books </li>
+                <li class="btn badge badge-dark"> Social </li>
+                <li class="btn badge badge-dark"> Educational </li>
+                <li class="btn badge badge-dark"> Art </li>
+                <li class="btn badge badge-dark"> Writing </li>
+                <li class="btn badge badge-dark"> Job Opportunity </li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Side Widget -->
       <div class="card my-4">
         <h5 class="card-header">Help (temporary)</h5>
@@ -95,18 +165,23 @@
         </div>
       </div>
 
+
     </div>
+
+
+
+
 
   </div>
   <!-- /.row -->
 
 </div>
+
+<button (click)="topFunction()" id="myBtn" title="Go to top">Top</button>
+
+
 <!-- /.container -->
 
 <!-- Footer -->
-<footer class="py-5 bg-dark">
-  <div class="container">
-    <p class="m-0 text-center text-white">@Husky Neighborhood 2019</p>
-  </div>
-  <!-- /.container -->
-</footer>
+
+

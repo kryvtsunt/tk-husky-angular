@@ -32,8 +32,8 @@ export class EventEditComponent implements OnInit {
       start_time : new Date(this.start_date + 'T' + this.start_time),
       end_time : new Date(this.end_date + 'T' + this.end_time),
       overview: this.event_description,
-      last_upd_date:Date.now();
-    }
+      last_upd_date:Date.now()
+    };
 
     this.eventService.createEvent(toCreateEvent)
       .then(event => {
