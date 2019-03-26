@@ -14,7 +14,9 @@ export class OrganizationComponent implements OnInit {
 
   orgId : String;
   org: {};
-
+  nallert(){
+    alert("The functionality is not implemented yet")
+  }
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this.orgId = params['orgId'];
