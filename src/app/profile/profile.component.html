@@ -44,7 +44,7 @@
             Senior BSCS at NEU
           </h5>
 
-          <p class="proile-rating">Status: <span> test user </span></p>
+          
 
 
           <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -153,18 +153,20 @@
       </li>
     </ul>
     <br />
-    <div class="card w-41 flex-row">
-      <div class="card-header border-0">
-        <img class="img-fluid" src="assets/book-love.jpeg" alt="img">
+    
+    <div class="card w-41 flex-row" *ngFor="let bookmark of bookmarkedEvents">
+        <div class="card-header border-0">
+          <img  src="assets/book-love.jpeg" alt="img">
+        </div>
+  
+        <div class="card-body">
+          <h5 class="card-title">{{bookmark.event.title}}</h5>
+          <p class="card-text">{{bookmark.event.description}}</p>
+          <a routerLink="../event/{{bookmark.event._id}}" class="btn-block btn btn-primary">View</a>
+        </div>
       </div>
 
-      <div class="card-body">
-        <h5 class="card-title">Blind Date with a Book</h5>
-        <p class="card-text">Don't judge a book by its cover. Put your trust in fate and buy a book
-          without knowing the title, maybe you will fall in love!</p>
-        <a routerLink="../event" class="btn-block btn btn-primary">View</a>
-      </div>
-    </div>
+
   </div>
 </div>
 
