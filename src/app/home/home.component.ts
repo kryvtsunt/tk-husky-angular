@@ -67,10 +67,14 @@ export class HomeComponent implements OnInit {
   }
 
   logout= () => {
+    var r = confirm("Are you sure you want to logout!");
+    if (r == true) {
+      this.userService.logout().then(()=> {
+        this.router.navigate(['login']);
+      });
+    } else {
 
-    this.userService.logout().then(()=> {
-      this.router.navigate(['login']);
-    });
+    }
   }
 
   topFunction() {
