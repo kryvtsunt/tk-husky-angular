@@ -21,7 +21,6 @@ export class EventComponent implements OnInit {
 
   eventId: String;
   event: {isBookmarked:false};
-  isRegistered: boolean;
   registerBtnText = "Register";
   liked = false;
   bookmarked = false;
@@ -65,12 +64,9 @@ export class EventComponent implements OnInit {
   registerForEvent() {
      if (this.liked){
        this.unlike()
-
      } else {
        this.like()
      }
-
-    this.registerBtnText = (this.liked) ? "Unregister" : "Register";
 
     //TODO: invoke DB
     // alert("Registration feature still under construction. Once registered your profile icon will appear in the list of icons below the 'Register' button");
@@ -91,6 +87,8 @@ export class EventComponent implements OnInit {
   checkLike() {
     this.registerService.checkLike(this.eventId).then((response) => {
       this.liked = response;
+      console.log(this.liked)
+      this.registerBtnText = (this.liked) ? "Unregister" : "Register";
     })
   }
 
