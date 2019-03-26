@@ -13,31 +13,35 @@ import {LikeServiceClient} from "../services/like.service.client";
 export class EventComponent implements OnInit {
 
   constructor(private eventService: EventServiceClient,
-    private bookmarkService:BookmarkServiceClient,
-    private userService:UserServiceClient,
+    private bookmarkService: BookmarkServiceClient,
+    private userService: UserServiceClient,
     private activatedRoute: ActivatedRoute,
               private registerService: LikeServiceClient,
     private router: Router) { }
 
-  eventId : String;
-  event: {};
-  isRegistered : boolean;
+  eventId: String;
+  event: {isBookmarked:false};
+  isRegistered: boolean;
   registerBtnText = "Register";
   liked = false;
   bookmarked = false;
+  comments = [];
+  comment: String;
+  user: {};
 
   ngOnInit() {
 
     this.activatedRoute.params.subscribe(params => {
       this.eventId = params['eventId'];
     });
-   console.log(this.eventId);
+    console.log(this.eventId);
 
+    this.userService.profile().then((user) => {
+      this.user = user;
+    }
+    )
     this.eventService.findEvent(this.eventId)
       .then(event => {
-        //TODO: event.isBookmarked = invoke bookmark service
-        event.isBookmarked = false;
-        console.log(event);
         this.event = event;
         console.log(this.event);
         this.checkLike();
@@ -50,6 +54,17 @@ export class EventComponent implements OnInit {
     this.userService.logout().then(()=> {
       this.router.navigate(['login']);
     });
+  }
+
+  addComment = () => {
+    if (this.comment.trim() === '') {
+      this.comment = '';
+      return;
+    }
+
+    console.log("in add");
+    this.comments.push(this.comment);
+    this.comment = '';
   }
 
 
@@ -89,7 +104,7 @@ export class EventComponent implements OnInit {
     this.registerService.like(this.event)
       .then(() => {
         this.checkLike();
-        // this.findUsersWhoLikedMovie();
+        
       });
   }
 
@@ -97,7 +112,7 @@ export class EventComponent implements OnInit {
     this.registerService.unlike(this.event)
       .then(() => {
         this.checkLike();
-        // this.findUsersWhoLikedMovie();
+        
       });
   }
 
