@@ -56,4 +56,8 @@ export class EventEditComponent implements OnInit {
   ngOnInit() {
   }
 
+  nallert(){
+    alert("The functionality is not implemented yet")
+  }
+
 }

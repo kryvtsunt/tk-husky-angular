@@ -70,4 +70,8 @@ export class ProfileComponent implements OnInit {
     this.events = this.registeredEvenets;
   }
 
+  editp(){
+    alert("The functionality is not implemented yet")
+  }
+
 }
