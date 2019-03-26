@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
   login() {
     
     this.resetErrors();
+    console.log("login")
     if (this.username.trim() === '') {
       this.noUsernameError = true;
       
@@ -41,7 +42,13 @@ export class LoginComponent implements OnInit {
           .then((response) => {
             if (response !== null) {
               console.log(response);
-              this.router.navigate(['home']);
+              if(response.role==="org"){
+                this.router.navigate(['organization/' + response._id]); 
+              }
+              else{
+                this.router.navigate(['home']);
+              }
+              
             } else {
               this.credentialsError = true;
             }
