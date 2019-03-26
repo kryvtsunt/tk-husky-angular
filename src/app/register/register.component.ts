@@ -62,7 +62,7 @@ export class RegisterComponent implements OnInit {
                   user.email = this.email;
                   console.log(user);
                   this.service.register(user)
-                    .then(() => this.router.navigate(['home']));
+                    .then(() => this.router.navigate(['login']));
                 } else {
                   this.usernameError = true;
                   // alert('Username is already taken');
