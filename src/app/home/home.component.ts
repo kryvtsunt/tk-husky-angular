@@ -95,6 +95,10 @@ export class HomeComponent implements OnInit {
   }
 
 
+  nallert(){
+    alert("The functionality is not implemented yet")
+  }
+
 
 
 }
