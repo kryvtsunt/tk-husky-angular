@@ -19,6 +19,8 @@ export class EventComponent implements OnInit {
 
   eventId : String;
   event: {};
+  isRegistered : boolean;
+  registerBtnText = "Register";
 
   ngOnInit() {
 
@@ -44,17 +46,28 @@ export class EventComponent implements OnInit {
     });
   }
 
-  bookmark = event => {
-    event.isBookmarked = !event.isBookmarked;
-    console.log(event);
-    //TODO: uncomment code to invoke DATABASE
-  //  if(event.isBookmarked){
-  //     this.bookmarkService.bookmark(event);
-  //   }
-  //   else{
-  //     this.bookmarkService.unbookmark(event);
-  //   }
+  
+  registerForEvent = eventId => {
+   
+    this.isRegistered = ! this.isRegistered;
+    this.registerBtnText = (this.isRegistered) ? "Unregister" : "Register";
+    //TODO: invoke DB
+    alert("Registration feature still under construction. Once registered your profile icon will appear in the list of icons below the 'Register' button");
+  }
 
+  bookmark = event => {
+    //event.isBookmarked = !event.isBookmarked;
+   
+   if(event.isBookmarked){
+      this.bookmarkService.unbookmark(event).then((response)=>{
+        event.isBookmarked = false;
+      });
+    }
+    else{
+      this.bookmarkService.bookmark(event).then((response)=>{
+        event.isBookmarked = true;
+      });
+    }
   }
 
 }
