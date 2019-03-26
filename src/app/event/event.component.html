@@ -125,25 +125,24 @@
     <h2 style="margin-bottom: 15px"> Reviews </h2>
 
     <div class="input-group">
-      <input type='text' class="form-control" id='userInput' placeholder='Enter Text Here' />
-      <input type='button' class="btn btn-primary md-2" onclick='changeText2()' value='Post a comment'/>
+      <input type='text' class="form-control" id='userInput' name= "comment" [(ngModel)] ="comment" placeholder='Enter Text Here' />
+      <input type='button' class="btn btn-primary md-2"  (click)='addComment()' value='Post a comment'/>
     </div>
     <br/>
-    <div *ngIf="loggedIn && reviews && reviews.length > 0">
-      <div *ngFor="let review of reviews">
+    <div *ngIf="comments.length > 0">
+      <div *ngFor="let comment of comments">
         <div class="row text-center shadow-lg p-3 mb-5 bg-white rounded" style="padding: 5px; margin: 5px;">
 
           <div class="col-md-2 rounded " style="padding: 20px">
             <!--<div class="">-->
-            <img src="img/1600.png" width="80px">
-            <h5>username</h5>
+            <img  src="assets/book-love.jpeg" width="80px">
+            <h5>{{user.username}}</h5>
             <!--</div>-->
           </div>
           <div class="col-md-8 bg-light" style="padding: 0px 0px;">
-            <div *ngIf="admin || review.user._id === user._id" (click)="deleteReview(review.review, review.user._id)"
-                 class="float-right hidden-md-up rounded"><i class="btn text-danger fa-lg fa fa-times"></i></div>
+           
             <br/>
-            <h5 style="margin: 20px"> review text </h5>
+            <h5 style="margin: 20px"> {{comment}} </h5>
             <br/>
             <br/>
           </div>
