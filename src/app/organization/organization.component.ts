@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrgServiceClient } from '../services/org.service.client';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {UserServiceClient} from "../services/user.service.client";
 
 @Component({
   selector: 'app-organization',
@@ -9,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class OrganizationComponent implements OnInit {
 
-  constructor(private orgService: OrgServiceClient,private activatedRoute: ActivatedRoute) { }
+  constructor( private router: Router, private orgService: OrgServiceClient,private activatedRoute: ActivatedRoute, private userService: UserServiceClient) { }
 
   orgId : String;
   org: {};
@@ -26,6 +27,17 @@ export class OrganizationComponent implements OnInit {
         this.org = org;
         console.log(this.org);
       });
+  }
+
+  logout= () => {
+    var r = confirm("Are you sure you want to logout!");
+    if (r == true) {
+      this.userService.logout().then(()=> {
+        this.router.navigate(['login']);
+      });
+    } else {
+
+    }
   }
 
 }

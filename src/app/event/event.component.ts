@@ -49,12 +49,6 @@ export class EventComponent implements OnInit {
       });
   }
 
-  logout= () => {
-
-    this.userService.logout().then(()=> {
-      this.router.navigate(['login']);
-    });
-  }
 
   addComment = () => {
     if (this.comment.trim() === '') {
@@ -69,15 +63,15 @@ export class EventComponent implements OnInit {
 
 
   registerForEvent() {
-
-    this.isRegistered = ! this.isRegistered;
-    this.registerBtnText = (this.isRegistered) ? "Unregister" : "Register";
      if (this.liked){
        this.unlike()
 
      } else {
        this.like()
      }
+
+    this.registerBtnText = (this.liked) ? "Unregister" : "Register";
+
     //TODO: invoke DB
     // alert("Registration feature still under construction. Once registered your profile icon will appear in the list of icons below the 'Register' button");
 
@@ -104,7 +98,7 @@ export class EventComponent implements OnInit {
     this.registerService.like(this.event)
       .then(() => {
         this.checkLike();
-        
+
       });
   }
 
@@ -112,7 +106,7 @@ export class EventComponent implements OnInit {
     this.registerService.unlike(this.event)
       .then(() => {
         this.checkLike();
-        
+
       });
   }
 
@@ -135,5 +129,16 @@ export class EventComponent implements OnInit {
         this.checkBookmark();
 
       });
+  }
+
+  logout= () => {
+    var r = confirm("Are you sure you want to logout!");
+    if (r == true) {
+      this.userService.logout().then(()=> {
+        this.router.navigate(['login']);
+      });
+    } else {
+
+    }
   }
 }

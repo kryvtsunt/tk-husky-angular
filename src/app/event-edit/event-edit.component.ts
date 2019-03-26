@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventServiceClient } from '../services/event.service.client';
 import { ActivatedRoute, Router } from '@angular/router';
+import {UserServiceClient} from "../services/user.service.client";
 
 
 
@@ -20,7 +21,7 @@ export class EventEditComponent implements OnInit {
   end_time: String;
 
   constructor(private router: Router,
-              private eventService: EventServiceClient) { }
+              private eventService: EventServiceClient, private userService: UserServiceClient) { }
 
 
   postEvent() {
@@ -58,6 +59,17 @@ export class EventEditComponent implements OnInit {
 
   nallert(){
     alert("The functionality is not implemented yet")
+  }
+
+  logout= () => {
+    var r = confirm("Are you sure you want to logout!");
+    if (r == true) {
+      this.userService.logout().then(()=> {
+        this.router.navigate(['login']);
+      });
+    } else {
+
+    }
   }
 
 }

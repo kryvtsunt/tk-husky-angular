@@ -8,7 +8,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav ml-auto">
+      <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <a class="nav-link" routerLink="../../home">Events
           </a>
@@ -16,13 +16,14 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="../../profile">Profile</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link"  (click) = "logout()">Log out</a>
-        </li>
+
         <!-- <li class="nav-item">
           <a class="nav-link" href="#">Contact</a>
         </li> -->
       </ul>
+
+      <button class="btn btn-danger"  (click) = "logout()">Log out</button>
+
     </div>
   </div>
 </nav>
@@ -140,7 +141,7 @@
             <!--</div>-->
           </div>
           <div class="col-md-8 bg-light" style="padding: 0px 0px;">
-           
+
             <br/>
             <h5 style="margin: 20px"> {{comment}} </h5>
             <br/>

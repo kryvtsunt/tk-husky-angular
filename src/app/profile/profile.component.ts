@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
   follow: boolean;
   routerLink: string;
 
-  constructor(private router: Router, private service: UserServiceClient,
+  constructor(private router: Router, private service: UserServiceClient, private userService: UserServiceClient,
               private bookmarkService: BookmarkServiceClient, private registerService: LikeServiceClient) { }
 
   ngOnInit() {
@@ -72,6 +72,17 @@ export class ProfileComponent implements OnInit {
 
   editp(){
     alert("The functionality is not implemented yet")
+  }
+
+  logout= () => {
+    var r = confirm("Are you sure you want to logout!");
+    if (r == true) {
+      this.userService.logout().then(()=> {
+        this.router.navigate(['login']);
+      });
+    } else {
+
+    }
   }
 
 }
