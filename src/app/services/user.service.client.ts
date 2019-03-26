@@ -16,7 +16,7 @@ export class UserServiceClient {
   }
 
   checkStatus() {
-    return fetch(HOST + 'api/status',
+    return fetch(HOST + 'api/HNbhood/status',
       {
         credentials: 'include'
       })
@@ -53,7 +53,7 @@ export class UserServiceClient {
   }
 
   logout() {
-    
+
     return fetch(HOST + 'api/HNbhood/logout', {
       method: 'post',
       credentials: 'include'

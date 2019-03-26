@@ -144,28 +144,44 @@
   <div class="bookmarked">
     <ul class="nav nav-tabs" id="eventsTab" role="tablist">
       <li class="nav-item">
-        <a class="nav-link active"  data-toggle="tab" role="tab"
+        <a (click)="setbookmarked()" class="nav-link active"  data-toggle="tab" role="tab"
            aria-controls="home" aria-selected="true"> <i class="text-warning fa fa-bookmark "></i>  Recently Bookmarked Events</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" role="tab"
+        <a (click)="setregistered()" class="nav-link" data-toggle="tab" role="tab"
            aria-controls="home" aria-selected="true"> <i class="text-success fas fa-clipboard-check"></i>  Recently Registered Events</a>
       </li>
     </ul>
     <br />
-    <div class="card w-41 flex-row">
-      <div class="card-header border-0">
-        <img class="img-fluid" src="assets/book-love.jpeg" alt="img">
-      </div>
+    <div *ngFor="let event of events">
+      <div>
+        <div class="row">
+          <div class="card-header border-0 col-3">
+            <img class="img-fluid" src="./assets/book.jpg" alt="event image">
+            <!--<p><strong>Location: </strong> {{event.event.venue}}</p>-->
+          </div>
 
-      <div class="card-body">
-        <h5 class="card-title">Blind Date with a Book</h5>
-        <p class="card-text">Don't judge a book by its cover. Put your trust in fate and buy a book
-          without knowing the title, maybe you will fall in love!</p>
-        <a routerLink="../event" class="btn-block btn btn-primary">View</a>
+          <div class="card-body col-9">
+            <h5 class="card-title">{{event.event.title}}</h5>
+            <p class="card-text">{{event.event.description.substring(0,200)}}...</p>
+            <a routerLink="../event" class="btn-block btn btn-primary">View</a>
+          </div>
+        </div>
       </div>
     </div>
+
   </div>
+
+
 </div>
+
+<footer class="py-5 bg-dark">
+  <div class="container">
+    <p class="m-0 text-center text-white">@Husky Neighborhood 2019</p>
+  </div>
+  <!-- /.container -->
+</footer>
+
+
 
 
