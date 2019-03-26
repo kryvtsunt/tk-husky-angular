@@ -76,12 +76,14 @@
       </div>
       <div class="card-body">
         <p> <strong>WHERE?</strong> {{event.venue}}
-        <p> <strong>WHEN?</strong> {{event.start_time}} to {{event.end_time}}
+        <p> <strong>WHEN?</strong> {{event.start_time | date:'medium'}} to {{event.end_time  | date:'medium'}}
           <!-- <a href="#" class="btn btn-primary">Read More &rarr;</a> -->
       </div>
       <div class="card-footer" id="register">
 
-        <button class="btn btn-primary btn-block">Register</button>
+        <button class="btn btn-primary btn-block" [ngClass]="{'btn-danger': isRegistered}" (click)="registerForEvent(event._id)" >
+          {{registerBtnText}}
+        </button>
         <br/>
         <!-- <p><img src="img/paw2.jpg" width=20px/> User1
         <p><img src="img/paw2.jpg" width=20px/> User2

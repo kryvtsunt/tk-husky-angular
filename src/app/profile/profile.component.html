@@ -44,7 +44,7 @@
             Senior BSCS at NEU
           </h5>
 
-          <p class="proile-rating">Status: <span> test user </span></p>
+
 
 
           <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -164,7 +164,7 @@
           <div class="card-body col-9">
             <h5 class="card-title">{{event.event.title}}</h5>
             <p class="card-text">{{event.event.description.substring(0,200)}}...</p>
-            <a routerLink="../event" class="btn-block btn btn-primary">View</a>
+            <a routerLink="../event/{{event.event._id}}" class="btn-block btn btn-primary">View</a>
           </div>
         </div>
       </div>
