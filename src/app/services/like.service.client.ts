@@ -17,7 +17,7 @@ export class LikeServiceClient {
     });
   }
   unlike(event) {
-    return fetch(HOST + 'api/HNbhood/like/event', {
+    return fetch(HOST + 'api/HNbhood/like/event/'+ event._id, {
       body: JSON.stringify(event),
       credentials: 'include', // include, same-origin, *omit
       method: 'delete',
