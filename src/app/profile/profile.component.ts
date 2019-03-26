@@ -27,12 +27,28 @@ export class ProfileComponent implements OnInit {
   constructor(private router: Router, private service: UserServiceClient, private userService: UserServiceClient,
               private bookmarkService: BookmarkServiceClient, private registerService: LikeServiceClient) { }
 
+  // ngOnInit() {
+  //   this.service.profile()
+  //     .then(user => {
+  //         this.service.findUserByUsername(user.username)
+  //           .then(u => {
+  //             this.user = Object.assign({}, u);
+  //             if (user.role === 'user') {
+  //               this.admin = true;
+  //             } else {
+  //               this.admin = false;
+  //             }
+  //             this.findAllBookmarkedEvents();
+  //             this.findAllRegisteredEvents();
+  //           });
+  //     })
+  // }
   ngOnInit() {
     this.service.profile()
       .then(user => {
-          this.service.findUserByUsername(user.username)
-            .then(u => {
-              this.user = Object.assign({}, u);
+          // this.service.findUserByUsername(user.username)
+            //.then(u => {
+              this.user = user;//Object.assign({}, u);
               if (user.role === 'user') {
                 this.admin = true;
               } else {
@@ -40,7 +56,7 @@ export class ProfileComponent implements OnInit {
               }
               this.findAllBookmarkedEvents();
               this.findAllRegisteredEvents();
-            });
+          //  });
       })
   }
 
