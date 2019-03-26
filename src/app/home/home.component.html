@@ -39,9 +39,9 @@
       <br/>
       <div class="d-flex justify-content-end">
         <div class="btn-group">
-          <button type="button" class="btn btn-default btn-filter">All</button>
-          <button type="button" class="btn btn-secondary btn-filter">Relevant</button>
-          <button type="button" class="btn btn-default btn-filter">Upcoming</button>
+          <button type="button" (click)="alle()" class="btn btn-secondary btn-filter">All</button>
+          <button type="button" (click)="alle()" class="btn btn-default btn-filter">Relevant</button>
+          <button type="button" (click)="alle()" class="btn btn-default btn-filter">Upcoming</button>
         </div>
       </div>
       <br/>
@@ -98,13 +98,13 @@
     <div class="col-md-4">
       <!-- Search Widget -->
       <div class="card my-4">
-        <h5 class="card-header">Search by Word</h5>
+        <h5 class="card-header">Search by Title</h5>
         <div class="card-body">
 
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Input the word to search">
+            <input  [(ngModel)]="this.word" type="text" class="form-control" placeholder="Input the word to search">
             <span class="input-group-btn">
-                <button class="btn btn-secondary" type="button">Go</button>
+                <button (click)="search()" class="btn btn-secondary" type="button">Go</button>
               </span>
           </div>
         </div>
@@ -116,9 +116,9 @@
         <div class="card-body">
           <div class="input-group">
             <input type="date" class="form-control" name="date" id="date"
-                   title="enter date">
+                   title="enter date" disabled>
             <span class="input-group-btn">
-                <button class="btn btn-secondary" type="button">Go</button>
+                <button class="btn btn-secondary" type="button" disabled>Go</button>
               </span>
           </div>
 
@@ -134,7 +134,7 @@
           <div class="input-group">
             <input type="text" class="form-control" disabled>
             <span class="input-group-btn">
-                <button class="btn btn-secondary" type="button">Go</button>
+                <button class="btn btn-secondary" type="button" disabled>Go</button>
               </span>
           </div>
           <br/>

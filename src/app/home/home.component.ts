@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
         });
         console.log(events);
         this.events = events;
+        this.all = events;
       });
   }
 
@@ -42,6 +43,8 @@ export class HomeComponent implements OnInit {
 
 
   events = [];
+  all = []
+  word = "";
 
   viewEvent = eventId => {
     //console.log(eventId);
@@ -50,7 +53,7 @@ export class HomeComponent implements OnInit {
 
   bookmark = event => {
     //event.isBookmarked = !event.isBookmarked;
-   
+
    if(event.isBookmarked){
       this.bookmarkService.unbookmark(event).then((response)=>{
         event.isBookmarked = false;
@@ -73,6 +76,18 @@ export class HomeComponent implements OnInit {
   topFunction() {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
+
+  search() {
+    console.log(this.word);
+    console.log(this.events[0].title)
+    this.events = this.events.filter(event => event.title !== undefined)
+      .filter(e => e.title.toLowerCase().includes(this.word.toLowerCase()))
+    this.word = "";
+  }
+
+  alle() {
+    this.events = this.all;
   }
 
 
