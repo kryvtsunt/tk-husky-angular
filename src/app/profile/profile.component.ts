@@ -39,6 +39,7 @@ export class ProfileComponent implements OnInit {
                 this.admin = false;
               }
               this.findAllBookmarkedEvents();
+              this.findAllRegisteredEvents();
             });
       })
   }

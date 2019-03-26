@@ -3,6 +3,7 @@ import { EventServiceClient } from '../services/event.service.client';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookmarkServiceClient } from '../services/bookmark.service.client';
 import { UserServiceClient } from '../services/user.service.client';
+import {LikeServiceClient} from "../services/like.service.client";
 
 @Component({
   selector: 'app-event',
@@ -15,12 +16,15 @@ export class EventComponent implements OnInit {
     private bookmarkService:BookmarkServiceClient,
     private userService:UserServiceClient,
     private activatedRoute: ActivatedRoute,
-    private router: Router,) { }
+              private registerService: LikeServiceClient,
+    private router: Router) { }
 
   eventId : String;
   event: {};
   isRegistered : boolean;
   registerBtnText = "Register";
+  liked = false;
+  bookmarked = false;
 
   ngOnInit() {
 
@@ -36,38 +40,85 @@ export class EventComponent implements OnInit {
         console.log(event);
         this.event = event;
         console.log(this.event);
+        this.checkLike();
+        this.checkBookmark();
       });
   }
 
   logout= () => {
-  
+
     this.userService.logout().then(()=> {
       this.router.navigate(['login']);
     });
   }
 
-  
-  registerForEvent = eventId => {
-   
+
+  registerForEvent() {
+
     this.isRegistered = ! this.isRegistered;
     this.registerBtnText = (this.isRegistered) ? "Unregister" : "Register";
+     if (this.liked){
+       this.unlike()
+
+     } else {
+       this.like()
+     }
     //TODO: invoke DB
-    alert("Registration feature still under construction. Once registered your profile icon will appear in the list of icons below the 'Register' button");
+    // alert("Registration feature still under construction. Once registered your profile icon will appear in the list of icons below the 'Register' button");
+
   }
 
-  bookmark = event => {
+  bookmarkEvent() {
     //event.isBookmarked = !event.isBookmarked;
-   
-   if(event.isBookmarked){
-      this.bookmarkService.unbookmark(event).then((response)=>{
-        event.isBookmarked = false;
-      });
+
+   if(this.bookmarked){
+      this.unbookmark()
     }
     else{
-      this.bookmarkService.bookmark(event).then((response)=>{
-        event.isBookmarked = true;
-      });
+      this.bookmark()
     }
   }
 
+  checkLike() {
+    this.registerService.checkLike(this.eventId).then((response) => {
+      this.liked = response;
+    })
+  }
+
+  like() {
+    this.registerService.like(this.event)
+      .then(() => {
+        this.checkLike();
+        // this.findUsersWhoLikedMovie();
+      });
+  }
+
+  unlike() {
+    this.registerService.unlike(this.event)
+      .then(() => {
+        this.checkLike();
+        // this.findUsersWhoLikedMovie();
+      });
+  }
+
+  checkBookmark() {
+    this.bookmarkService.checkBookmark(this.eventId).then((response) => {
+      this.bookmarked = response;
+    })
+  }
+
+  bookmark() {
+    this.bookmarkService.bookmark(this.event)
+      .then(() => {
+        this.checkBookmark();
+      });
+  }
+
+  unbookmark() {
+    this.bookmarkService.unbookmark(this.event)
+      .then(() => {
+        this.checkBookmark();
+
+      });
+  }
 }
