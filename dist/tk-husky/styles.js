@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#main {\n  padding-bottom: 350px;\n}\n"
+module.exports = ""
 
 /***/ }),
 
