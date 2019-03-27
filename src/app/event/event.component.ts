@@ -139,4 +139,8 @@ export class EventComponent implements OnInit {
 
     }
   }
+
+  nallert(){
+    alert("The functionality is not implemented yet")
+  }
 }

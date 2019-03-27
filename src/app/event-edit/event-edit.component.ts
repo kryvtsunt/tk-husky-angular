@@ -19,6 +19,7 @@ export class EventEditComponent implements OnInit {
   end_date: String;
   start_time: String;
   end_time: String;
+  img: String
 
   constructor(private router: Router,
               private eventService: EventServiceClient, private userService: UserServiceClient) { }
@@ -33,7 +34,8 @@ export class EventEditComponent implements OnInit {
       start_time : new Date(this.start_date + 'T' + this.start_time),
       end_time : new Date(this.end_date + 'T' + this.end_time),
       overview: this.event_description,
-      last_upd_date:Date.now()
+      last_upd_date:Date.now(),
+      image_path:this.img
     };
 
     this.eventService.createEvent(toCreateEvent)
@@ -52,9 +54,11 @@ export class EventEditComponent implements OnInit {
     this.end_date = '';
     this.start_time = '';
     this.end_time = '';
+    this.img = "./assets/library.jpeg"
   }
 
   ngOnInit() {
+    this.img = "./assets/library.jpeg"
   }
 
   nallert(){

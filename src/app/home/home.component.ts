@@ -13,8 +13,10 @@ import { BookmarkServiceClient } from '../services/bookmark.service.client';
 })
 
 
-
 export class HomeComponent implements OnInit {
+
+  org: boolean;
+
   ngOnInit(): void {
 
     this.eventService.findAllEvents()
@@ -32,6 +34,10 @@ export class HomeComponent implements OnInit {
         this.events = events;
         this.all = events;
       });
+    this.userService.profile().then(user => {
+      if (user.role == "org") this.org = true
+      else this.org = false
+    });
   }
 
   constructor(private userService: UserServiceClient,
