@@ -28,12 +28,12 @@ export class LoginComponent implements OnInit {
 
 
   login() {
-    
+
     this.resetErrors();
     console.log("login")
     if (this.username.trim() === '') {
       this.noUsernameError = true;
-      
+
     } else {
       if (this.password.trim() === '') {
         this.noPasswordError = true;
@@ -43,12 +43,12 @@ export class LoginComponent implements OnInit {
             if (response !== null) {
               console.log(response);
               if(response.role==="org"){
-                this.router.navigate(['organization/' + response._id]); 
+                this.router.navigate(['organization/']);
               }
               else{
                 this.router.navigate(['home']);
               }
-              
+
             } else {
               this.credentialsError = true;
             }

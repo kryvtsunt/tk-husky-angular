@@ -18,8 +18,8 @@ export class OrganizationComponent implements OnInit {
     alert("The functionality is not implemented yet")
   }
   ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
-      this.orgId = params['orgId'];
+    this.userService.profile().then(user => {
+      this.orgId = user._id;
     });
    console.log(this.orgId);
 
