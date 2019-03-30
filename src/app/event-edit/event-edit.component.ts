@@ -15,11 +15,16 @@ export class EventEditComponent implements OnInit {
   event_name: String;
   event_description: String;
   event_location: String;
+  event_room: String;
+  event_directions: String;
   start_date: String;
   end_date: String;
   start_time: String;
   end_time: String;
-  img: String
+  img: String;
+  stags: String[];
+  dtags: String[];
+  alltags: String[];
 
   constructor(private router: Router,
               private eventService: EventServiceClient, private userService: UserServiceClient) { }
@@ -35,7 +40,10 @@ export class EventEditComponent implements OnInit {
       end_time : new Date(this.end_date + 'T' + this.end_time),
       overview: this.event_description,
       last_upd_date:Date.now(),
-      image_path:this.img
+      image_path:this.img,
+      tags: this.stags,
+      room: this.event_room,
+      directions: this.event_directions
     };
 
     this.eventService.createEvent(toCreateEvent)
@@ -54,13 +62,19 @@ export class EventEditComponent implements OnInit {
     this.end_date = '';
     this.start_time = '';
     this.end_time = '';
+    this.stags = []
+    this.dtags = this.alltags.slice();
+    this.event_directions = "";
+    this.event_room = "";
+
     this.img = "./assets/library.jpeg"
   }
 
   ngOnInit() {
     this.img = "./assets/library.jpeg"
-    this.dtags = ["Food", "Academia/Education", "Sport", "Social", "Job & Careers", "Spiritual", "Outdoor", "Music", "Art & Design", "Business", "Engineering", "Health & Wellness", "Law & Politics", "Undergraduate", "Graduate", "Cultural", "Fundraising", "Concert/Show", "Games", "Photo/Video", "Journalism", "Theatre", "Networking", "Free", "Paid"];
+    this.dtags = ["Food", "Academia/Education", "Sport", "Social", "Job & Careers", "Spiritual", "Outdoor", "Music", "Art & Design", "Business", "Engineering", "Health & Wellness", "Law & Politics", "Undergraduate", "Graduate", "Cultural", "Fundraising", "Concert/Show", "Games", "Photo/Video", "Journalism", "Theatre", "Networking"];
     this.stags = [];
+    this.alltags = this.dtags.slice();
   }
 
   nallert(){
