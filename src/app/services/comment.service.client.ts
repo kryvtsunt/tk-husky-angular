@@ -6,7 +6,7 @@ const HOST = 'http://localhost:4000/';
 @Injectable()
 export class CommentServiceClient {
   addComment(eventId, com, mov) {
-    const Comment = {Comment: com, event: mov};
+    const Comment = {comment: com, event: mov};
     return fetch(HOST + 'api/HNbhood/comment/event/' + eventId, {
       body: JSON.stringify(Comment),
       credentials: 'include',

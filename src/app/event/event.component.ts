@@ -3,7 +3,8 @@ import { EventServiceClient } from '../services/event.service.client';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookmarkServiceClient } from '../services/bookmark.service.client';
 import { UserServiceClient } from '../services/user.service.client';
-import {LikeServiceClient} from "../services/like.service.client";
+import { LikeServiceClient } from "../services/like.service.client";
+import { CommentServiceClient } from '../services/comment.service.client';
 
 @Component({
   selector: 'app-event',
@@ -16,17 +17,18 @@ export class EventComponent implements OnInit {
     private bookmarkService: BookmarkServiceClient,
     private userService: UserServiceClient,
     private activatedRoute: ActivatedRoute,
-              private registerService: LikeServiceClient,
+    private registerService: LikeServiceClient,
+    private commentService: CommentServiceClient,
     private router: Router) { }
 
   eventId: String;
-  event: {isBookmarked:false};
+  event: { isBookmarked: false };
   registerBtnText = "Register";
   liked = false;
   bookmarked = false;
   comments = [];
   comment: String;
-  user: {};
+  user: { username: '' };
 
   ngOnInit() {
 
@@ -46,27 +48,52 @@ export class EventComponent implements OnInit {
         this.checkLike();
         this.checkBookmark();
       });
+
+      this.commentService.findAllComments(this.eventId).then((response)=>{
+        console.log("FETCHED COMMENTS");
+        console.log(response);
+        this.comments = response;
+      })
   }
 
 
   addComment = () => {
+
     if (this.comment.trim() === '') {
       this.comment = '';
       return;
     }
 
-    console.log("in add");
-    this.comments.push(this.comment);
+
+    // const newComment = {
+
+    //   username: this.user.username,
+    //   text: this.comment,
+    //   date: Date.now()
+    // }
+
+    this.commentService.addComment(this.eventId, this.comment,this.event ).then(() => {
+      this.commentService.findAllComments(this.eventId).then((response)=>{
+        console.log("FETCHED COMMENTS");
+        console.log(response);
+        this.comments = response;
+      })
+    });
+
+
+
+    // console.log("in add");
+    // this.comments.push(this.comment);
     this.comment = '';
   }
 
 
   registerForEvent() {
-     if (this.liked){
-       this.unlike()
-     } else {
-       this.like()
-     }
+    if (this.liked) {
+      this.unlike()
+    } else {
+      this.like()
+    }
 
     //TODO: invoke DB
     // alert("Registration feature still under construction. Once registered your profile icon will appear in the list of icons below the 'Register' button");
@@ -76,10 +103,10 @@ export class EventComponent implements OnInit {
   bookmarkEvent() {
     //event.isBookmarked = !event.isBookmarked;
 
-   if(this.bookmarked){
+    if (this.bookmarked) {
       this.unbookmark()
     }
-    else{
+    else {
       this.bookmark()
     }
   }
@@ -129,10 +156,10 @@ export class EventComponent implements OnInit {
       });
   }
 
-  logout= () => {
+  logout = () => {
     var r = confirm("Are you sure you want to logout!");
     if (r == true) {
-      this.userService.logout().then(()=> {
+      this.userService.logout().then(() => {
         this.router.navigate(['login']);
       });
     } else {
@@ -140,7 +167,7 @@ export class EventComponent implements OnInit {
     }
   }
 
-  nallert(){
+  nallert() {
     alert("The functionality is not implemented yet")
   }
 }
