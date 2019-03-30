@@ -72,7 +72,7 @@ export class EventEditComponent implements OnInit {
 
   ngOnInit() {
     this.img = "./assets/library.jpeg"
-    this.dtags = ["Food", "Academia/Education", "Sport", "Social", "Job & Careers", "Spiritual", "Outdoor", "Music", "Art & Design", "Business", "Engineering", "Health & Wellness", "Law & Politics", "Undergraduate", "Graduate", "Cultural", "Fundraising", "Concert/Show", "Games", "Photo/Video", "Journalism", "Theatre", "Networking"];
+    this.dtags = ["Food", "Academia / Education", "Sports", "Social", "Job / Career", "Spiritual / Ethics", "Outdoor", "Music", "Dance", "Art / Design", "Business", "Engineering", "Health / Wellness", "Law / Politics", "Undergraduate", "Graduate", "Culture", "Fundraiser", "Concert / Show", "Games / Entertainment", "Journalism", "Theatre", "Networking", "Cinematography", "Tech / Innovations", "Charity", "Lecture / Talk", "Competition / Contest", "Environment / Sustainability", "Motivation / Inspiration", "Workshop"];
     this.stags = [];
     this.alltags = this.dtags.slice();
   }
