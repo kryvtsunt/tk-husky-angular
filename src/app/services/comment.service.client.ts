@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 
-// const HOST = 'https://huskyneighborhood.herokuapp.com/';
+//const HOST = 'https://huskyneighborhood.herokuapp.com/';
 const HOST = 'http://localhost:4000/';
 
 @Injectable()
@@ -18,7 +18,7 @@ export class CommentServiceClient {
   }
 
   deleteComment(eventId, userId, rev) {
-    const Comment = {Comment: rev};
+    const Comment = {comment: rev};
     return fetch(HOST + 'api/HNbhood/comment/event/' + eventId + '/user/' + userId, {
       body: JSON.stringify(Comment),
       method: 'delete',
