@@ -151,6 +151,7 @@
           <!--<button class="btn btn-lg btn-block btn-danger fa fa-times fa-lg"></button>-->
           <!--</div>-->
           <div class="col-md-2 rounded" style="padding: 20px">
+            <button *ngIf= "commentObj.user.username == user.username" type="button" class="btn btn-danger" (click)="deleteComment(commentObj)">Delete </button>
             <!--<div class="">-->
             <h6><em>{{commentObj.date  | date:'mediumDate'}}</em></h6>
             <br/>

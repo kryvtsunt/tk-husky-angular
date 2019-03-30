@@ -28,7 +28,7 @@ export class EventComponent implements OnInit {
   bookmarked = false;
   comments = [];
   comment: String;
-  user: { username: '' };
+  user: { username: '', _id:'' };
 
   ngOnInit() {
 
@@ -64,14 +64,6 @@ export class EventComponent implements OnInit {
       return;
     }
 
-
-    // const newComment = {
-
-    //   username: this.user.username,
-    //   text: this.comment,
-    //   date: Date.now()
-    // }
-
     this.commentService.addComment(this.eventId, this.comment,this.event ).then(() => {
       this.commentService.findAllComments(this.eventId).then((response)=>{
         console.log("FETCHED COMMENTS");
@@ -80,13 +72,22 @@ export class EventComponent implements OnInit {
       })
     });
 
-
-
-    // console.log("in add");
-    // this.comments.push(this.comment);
     this.comment = '';
   }
 
+  deleteComment = (commentObj) => {
+
+   
+  console.log("in delete")
+    this.commentService.deleteComment(this.eventId, this.user._id ,commentObj.comment)
+    .then(() => {
+      this.commentService.findAllComments(this.eventId).then((response)=>{
+        console.log("FETCHED COMMENTS");
+        console.log(response);
+        this.comments = response;
+      })
+    });
+  }
 
   registerForEvent() {
     if (this.liked) {
