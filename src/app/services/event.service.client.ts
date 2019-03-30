@@ -1,6 +1,7 @@
 
 import {Injectable} from '@angular/core';
 
+
 // const HOST = 'https://huskyneighborhood.herokuapp.com/';
 const HOST = 'http://localhost:4000/';
 
@@ -21,7 +22,7 @@ export class EventServiceClient {
 
   createEvent(toCreateEvent) {
 
-    console.log()
+    console.log();
     return fetch(HOST + 'api/HNbhood/user/1/event', {
       method: 'post',
       headers: {
@@ -61,6 +62,17 @@ export class EventServiceClient {
 
   findAllEvents() {
     return fetch(HOST + 'api/HNbhood/')
+      .then(response => {
+        return response.json();
+      });
+  }
+  findEventsForOrg(OrgId) {
+    return fetch(HOST + 'api/HNbhood/' + OrgId, {
+      method: 'get',
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
       .then(response => {
         return response.json();
       });
