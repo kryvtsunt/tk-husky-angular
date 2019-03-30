@@ -59,6 +59,8 @@ export class EventEditComponent implements OnInit {
 
   ngOnInit() {
     this.img = "./assets/library.jpeg"
+    this.dtags = ["Food", "Academia/Education", "Sport", "Social", "Job & Careers", "Spiritual", "Outdoor", "Music", "Art & Design", "Business", "Engineering", "Health & Wellness", "Law & Politics", "Undergraduate", "Graduate", "Cultural", "Fundraising", "Concert/Show", "Games", "Photo/Video", "Journalism", "Theatre", "Networking", "Free", "Paid"];
+    this.stags = [];
   }
 
   nallert(){
@@ -74,6 +76,16 @@ export class EventEditComponent implements OnInit {
     } else {
 
     }
+  }
+
+  to_stags(t){
+    this.stags.push(t);
+    this.dtags.splice(this.dtags.indexOf(t), 1);
+  }
+
+  to_dtags(t){
+    this.dtags.push(t);
+    this.stags.splice(this.stags.indexOf(t), 1);
   }
 
 }
