@@ -13,6 +13,7 @@ body {
   background-color: #000;
   overflow-x: hidden;
   padding-top: 20px;
+  overflow: hidden;
 }
 
 
@@ -58,7 +59,7 @@ body {
 
 
 .login-main-text{
-  margin-top: 20%;
+  margin-top: 10%;
   padding: 60px;
   color: #fff;
 }
