@@ -16,6 +16,9 @@ import { BookmarkServiceClient } from '../services/bookmark.service.client';
 export class HomeComponent implements OnInit {
 
   org: boolean;
+  stags: string[];
+  dtags: string[];
+
 
   ngOnInit(): void {
 
@@ -33,6 +36,8 @@ export class HomeComponent implements OnInit {
         console.log(events);
         this.events = events;
         this.all = events;
+        this.dtags = ["Food", "Academia/Education", "Sport", "Social", "Job & Careers", "Spiritual", "Outdoor", "Music", "Art & Design", "Business", "Engineering", "Health & Wellness", "Law & Politics", "Undergraduate", "Graduate", "Cultural", "Fundraising", "Concert/Show", "Games", "Photo/Video", "Journalism", "Theatre", "Networking", "Free", "Paid"];
+        this.stags = [];
       });
     this.userService.profile().then(user => {
       if (user.role == "org") this.org = true
@@ -104,6 +109,19 @@ export class HomeComponent implements OnInit {
   nallert(){
     alert("The functionality is not implemented yet")
   }
+
+  to_stags(t){
+    this.stags.push(t);
+    this.dtags.splice(this.dtags.indexOf(t), 1);
+  }
+
+  to_dtags(t){
+    this.dtags.push(t);
+    this.stags.splice(this.stags.indexOf(t), 1);
+  }
+
+
+
 
 
 

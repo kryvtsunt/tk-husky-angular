@@ -42,19 +42,25 @@
     <div class="col-md-8">
 
       <br/>
-      <div class="d-flex justify-content-end">
-        <div class="btn-group">
-          <button type="button" (click)="alle()" class="btn btn-secondary btn-filter">All</button>
-          <button type="button" (click)="alle()" class="btn btn-default btn-filter">Relevant</button>
-          <button type="button" (click)="alle()" class="btn btn-default btn-filter">Upcoming</button>
+
+      <div>
+        <button class="btn btn-info dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Filter
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">All</a>
+          <a class="dropdown-item" href="#">Relevant</a>
+          <a class="dropdown-item" href="#">Upcoming</a>
         </div>
       </div>
+
       <br/>
+
 
 
       <div class="card mb-4" *ngFor="let event of events">
 
-        <img class="card-img-top" src="./assets/book.jpg"  width="100px" alt="Card image cap">
+        <img class="card-img-top" src="{{event.image_path}}"  width="100px" alt="Card image cap">
 
         <div class="card-img-overlay">
           <span class="badge badge-primary"> Free food </span>
@@ -103,7 +109,7 @@
     <div class="col-md-4">
       <!-- Search Widget -->
       <div class="card my-4">
-        <h5 class="card-header">Search by Title</h5>
+        <h5 class="card-header">Search by Title </h5>
         <div class="card-body">
 
           <div class="input-group">
@@ -112,6 +118,10 @@
                 <button (click)="search()" class="btn btn-secondary" type="button">Go</button>
               </span>
           </div>
+          <hr/>
+          <span>
+          Search results for:  <i> word </i> <i class="btn btn-sm btn-outline-danger fa fa-times d-flex float-right" style="margin-right: 15px;"> </i>
+          </span>
         </div>
 
       </div>
@@ -136,33 +146,37 @@
       <div class="card my-4">
         <h5 class="card-header">Search by Tags</h5>
         <div class="card-body">
-          <div class="input-group">
-            <input type="text" class="form-control" disabled>
-            <span class="input-group-btn">
+          <div class="row">
+            <div class="col-md-9">
+              <ul class="list-unstyled mb-0" >
+                <li class="btn badge badge-success" *ngFor="let tag of stags"(click)="to_dtags(tag)"> {{tag}} </li>
+              </ul>
+              <hr/>
+
+              <ul class="list-unstyled mb-0" >
+                <li class="btn badge badge-dark" *ngFor="let tag of dtags" (click)="to_stags(tag)"> {{tag}} </li>
+              </ul>
+
+            </div>
+            <div class="col-md-3">
+              <span class="d-flex float-right">
                 <button class="btn btn-secondary" type="button" disabled>Go</button>
               </span>
-          </div>
+            </div>
+          <!--<div class="input-group">-->
+            <!--<input type="text" class="form-control" disabled>-->
+
+          <!--</div>-->
           <br/>
 
-          <div class="row">
-            <div class="col-lg-12">
-              <ul class="list-unstyled mb-0">
-                <li class="btn badge badge-success"> Free food </li>
-                <hr/>
-                <li class="btn badge badge-dark"> Books </li>
-                <li class="btn badge badge-dark"> Social </li>
-                <li class="btn badge badge-dark"> Educational </li>
-                <li class="btn badge badge-dark"> Art </li>
-                <li class="btn badge badge-dark"> Writing </li>
-                <li class="btn badge badge-dark"> Job Opportunity </li>
 
-              </ul>
-            </div>
-          </div>
         </div>
       </div>
+        <i class="card-footer small"> press on tags to select/deselect them </i>
+      </div>
 
-      <!-- Side Widget -->
+
+        <!-- Side Widget -->
       <div class="card my-4">
         <h5 class="card-header">Help (temporary)</h5>
         <div class="card-body">
