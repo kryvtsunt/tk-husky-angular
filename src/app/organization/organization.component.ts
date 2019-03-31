@@ -46,11 +46,6 @@ export class OrganizationComponent implements OnInit {
     });
   }
 
-  // setupcoming(){
-  //   this.events = this.upcomingEvents;
-  // }
-
-
   logout= () => {
     var r = confirm("Are you sure you want to logout!");
     if (r == true) {

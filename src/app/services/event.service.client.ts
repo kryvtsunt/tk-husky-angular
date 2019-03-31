@@ -48,7 +48,7 @@ export class EventServiceClient {
   }
 
   updateEvent(EventId, Event) {
-    return fetch(HOST + 'api/HNbhood/Event/' + EventId, {
+    return fetch(HOST + 'api/HNbhood/' + EventId, {
       body: JSON.stringify(Event),
       method: 'put',
       headers: {

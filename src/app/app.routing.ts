@@ -19,6 +19,7 @@ const appRoutes: Routes = [
   { path: 'organization/:orgId', component: OrganizationComponent},
    { path: 'event/:eventId', component: EventComponent },
   { path: 'event-edit', component: EventEditComponent },
+  { path: 'event-edit/:eventId', component: EventEditComponent },
   { path: '**', component: HomeComponent},
 ];
 export const routing = RouterModule.forRoot(appRoutes);
