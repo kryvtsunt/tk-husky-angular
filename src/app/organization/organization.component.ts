@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrgServiceClient } from '../services/org.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserServiceClient} from "../services/user.service.client";
+import { EventServiceClient } from '../services/event.service.client';
 
 @Component({
   selector: 'app-organization',
@@ -10,10 +11,15 @@ import {UserServiceClient} from "../services/user.service.client";
 })
 export class OrganizationComponent implements OnInit {
 
-  constructor( private router: Router, private orgService: OrgServiceClient,private activatedRoute: ActivatedRoute, private userService: UserServiceClient) { }
+  constructor( private router: Router, private orgService: OrgServiceClient,
+    private activatedRoute: ActivatedRoute,
+    private userService: UserServiceClient,
+    private eventService: EventServiceClient) { }
 
   orgId : String;
   org: {};
+  upcomingEvents = [];
+
   nallert(){
     alert("The functionality is not implemented yet")
   }
