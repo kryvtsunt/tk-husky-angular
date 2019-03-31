@@ -18,9 +18,6 @@
         <li class="nav-item active">
           <a class="nav-link" routerLink="../organization">Profile<span class="sr-only">(current)</span></a>
         </li>
-        <!-- <li class="nav-item">
-<a class="nav-link" href="#">Contact</a>
-</li> -->
       </ul>
 
       <button class="btn btn-danger"  (click) = "logout()">Log out</button>
@@ -85,13 +82,6 @@
             <a
               href="https://www.facebook.com/NEUFictionAddiction/">https://www.facebook.com/NEUFictionAddiction/</a><br />
           </div>
-          <!-- <p>SKILLS</p>
-                <a href="">Web Designer</a><br/>
-                <a href="">Web Developer</a><br/>
-                <a href="">WordPress</a><br/>
-                <a href="">WooCommerce</a><br/>
-                <a href="">PHP, .Net</a><br/> -->
-
         </div>
       </div>
 
@@ -130,22 +120,15 @@
                 <p>123 456 7890</p>
               </div>
             </div>
-
           </div>
-
         </div>
         <br />
         <br />
-
-
       </div>
     </div>
     <div class="col-md-5 float-right mr-0">
-      <!-- <input onclick="window.location='post-event.html';" type="submit" class="profile-edit-btn float-right" name="btnAddMore" value="Post New Event" /> -->
       <a routerLink="/event-edit" class="btn btn-success float-right"> <i class="fas fa-plus"></i> Post New Event </a>
     </div>
-
-
     <div class="events">
     <ul class="nav nav-tabs" id="eventsTab" role="tablist">
       <li class="nav-item">
@@ -153,46 +136,15 @@
            aria-controls="home" aria-selected="true">Upcoming Events</a>
       </li>
     </ul>
-    <br />
-    <div class="card w-41 flex-row">
+    <div class="card w-41 flex-row" *ngFor="let event of upcomingEvents">
       <div class="card-header border-0">
-        <img class="img-fluid" src="./assets/book-love.jpeg" alt="img">
+        <img class="img-fluid" src="{{event.image_path}}" alt="img">
       </div>
-
       <div class="card-body col-md-8">
-        <h5 class="card-title">Blind Date with a Book</h5>
-        <p class="card-text">Don't judge a book by its cover. Put your trust in fate and buy a book
-          without knowing the title, maybe you will fall in love!</p>
-        <a routerLink="../event-edit" class="btn btn-primary" (click)="nallert()">Edit</a>
-        <button type="button" onclick="confirmDelete()" class="btn btn-danger" (click)="nallert()">Delete </button>
-      </div>
-    </div>
-
-    <br />
-    <div class="card w-41 flex-row">
-      <div class="card-header border-0">
-        <img class="img-fluid" src="./assets/robot.jpeg" alt="img">
-      </div>
-
-      <div class="card-body col-md-8">
-        <h5 class="card-title">Ready Player One Movie Night</h5>
-        <p class="card-text">Watch the movie in 3D with us.</p>
-        <a routerLink="../event-edit" class="btn btn-primary" (click)="nallert()">Edit</a>
-        <button type="button" onclick="confirmDelete()" class="btn btn-danger" (click)="nallert()">Delete </button>
-      </div>
-    </div>
-
-    <br />
-    <div class="card w-41 flex-row">
-      <div class="card-header border-0">
-        <img class="img-fluid" src="./assets/library.jpeg" alt="img">
-      </div>
-
-      <div class="card-body col-md-6">
-        <h5 class="card-title">Library Tour</h5>
-        <p class="card-text">Come with us on a tour of the Boston Public Library.</p>
-        <a routerLink="../event-edit" class="btn btn-primary" (click)="nallert()">Edit</a>
-        <button type="button" onclick="confirmDelete()" class="btn btn-danger" (click)="nallert()">Delete </button>
+        <h5 class="card-title">{{event.title}}</h5>
+        <p class="card-text">{{event.description.substring(0,200)}}...</p>
+        <a routerLink="../event-edit/{{event._id}}" class="btn btn-primary">Edit</a>
+        <button type="button" (click) ="confirmDelete(event)" class="btn btn-danger">Delete </button>
       </div>
     </div>
     </div>

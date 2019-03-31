@@ -12,6 +12,7 @@ import {UserServiceClient} from "../services/user.service.client";
 })
 export class EventEditComponent implements OnInit {
 
+  eventId: String;
   event_name: String;
   event_description: String;
   event_location: String;
@@ -25,32 +26,63 @@ export class EventEditComponent implements OnInit {
   stags: String[];
   dtags: String[];
   alltags: String[];
+  editEvent: boolean;
 
   constructor(private router: Router,
-              private eventService: EventServiceClient, private userService: UserServiceClient) { }
+              private activatedRoute: ActivatedRoute,
+              private eventService: EventServiceClient,
+              private userService: UserServiceClient) { }
 
 
   postEvent() {
-    console.log("inside postEvent");
-    var toCreateEvent = {
-      title: this.event_name,
-      description: this.event_description,
-      venue : this.event_location,
-      start_time : new Date(this.start_date + 'T' + this.start_time),
-      end_time : new Date(this.end_date + 'T' + this.end_time),
-      overview: this.event_description,
-      last_upd_date:Date.now(),
-      image_path:this.img,
-      tags: this.stags,
-      room: this.event_room,
-      directions: this.event_directions
-    };
+    this.userService.profile().then(user => {
+      var toCreateEvent = {
+        title: this.event_name,
+        description: this.event_description,
+        venue : this.event_location,
+        start_time : new Date(this.start_date + 'T' + this.start_time),
+        end_time : new Date(this.end_date + 'T' + this.end_time),
+        overview: this.event_description,
+        last_upd_date:Date.now(),
+        image_path:this.img,
+        poster: user._id,
+        directions: this.event_directions,
+        room: this.event_room,
+        tags: this.stags
+      };
 
-    this.eventService.createEvent(toCreateEvent)
-      .then(event => {
-        console.log(event);
-        this.router.navigate(['home']);
-      });
+      this.eventService.createEvent(toCreateEvent)
+        .then(event => {
+          console.log(event);
+          this.router.navigate(['home']);
+        });
+    });
+
+  }
+
+  updateEvent() {
+    console.log("inside updateEvent");
+    this.userService.profile().then(user => {
+      var toUpdateEvent = {
+        title: this.event_name,
+        description: this.event_description,
+        venue : this.event_location,
+        start_time : new Date(this.start_date + 'T' + this.start_time),
+        end_time : new Date(this.end_date + 'T' + this.end_time),
+        overview: this.event_description,
+        last_upd_date:Date.now(),
+        image_path:this.img,
+        poster: user._id,
+        directions: this.event_directions,
+        room: this.event_room,
+        tags: this.stags
+      };
+
+      this.eventService.updateEvent(this.eventId, toUpdateEvent)
+        .then(event => {
+          this.router.navigate(['home']);
+        });
+    });
   }
 
   resetEvent() {
@@ -62,11 +94,10 @@ export class EventEditComponent implements OnInit {
     this.end_date = '';
     this.start_time = '';
     this.end_time = '';
-    this.stags = []
+    this.stags = [];
     this.dtags = this.alltags.slice();
     this.event_directions = "";
     this.event_room = "";
-
     this.img = "./assets/library.jpeg"
   }
 
@@ -75,6 +106,59 @@ export class EventEditComponent implements OnInit {
     this.dtags = ["Food", "Academia / Education", "Sports", "Social", "Job / Career", "Spiritual / Ethics", "Outdoor", "Music", "Dance", "Art / Design", "Business", "Engineering", "Health / Wellness", "Law / Politics", "Undergraduate", "Graduate", "Culture", "Fundraiser", "Concert / Show", "Games / Entertainment", "Journalism", "Theatre", "Networking", "Cinematography", "Tech / Innovations", "Charity", "Lecture / Talk", "Competition / Contest", "Environment / Sustainability", "Motivation / Inspiration", "Workshop"];
     this.stags = [];
     this.alltags = this.dtags.slice();
+
+    this.activatedRoute.params.subscribe(params => {
+      this.eventId = params['eventId'];
+    });
+
+    if(this.eventId) {
+      this.editEvent = true;
+      this.eventService.findEvent(this.eventId)
+      .then(event => {
+
+          console.log("To Edit Event", event);
+
+        let localStartDate = new Date(event.start_time);
+        let localEndDate = new Date(event.end_time);
+        let localStartMonth = "0" + (localStartDate.getMonth()+1);
+        let localEndMonth = "0" + (localEndDate.getMonth()+1);
+
+        let localStartDay = "0" + localStartDate.getDate();
+        let localEndDay = "0" + localEndDate.getDate();
+
+        let localStartHours = "0" + localStartDate.getHours();
+        let localEndHours = "0" + localEndDate.getHours();
+
+        let localStartMinutes = "0" + localStartDate.getMinutes();
+        let localEndMinutes = "0" + localEndDate.getMinutes();
+
+        localStartMonth = localStartMonth.slice(-2);
+        localEndMonth = localEndMonth.slice(-2);
+        localStartDay = localStartDay.slice(-2);
+        localEndDay = localEndDay.slice(-2);
+
+        localStartHours = localStartHours.slice(-2);
+        localEndHours = localEndHours.slice(-2);
+
+        localStartMinutes = localStartMinutes.slice(-2);
+        localEndMinutes = localEndMinutes.slice(-2);
+
+        this.event_name = event.title;
+        this.event_description = event.description;
+        this.event_location = event.venue;
+        this.start_date = localStartDate.getFullYear() + '-' + localStartMonth + '-' + localStartDay;
+        this.end_date = localEndDate.getFullYear() + '-' + localEndMonth + '-' + localEndDay;
+        this.start_time = localStartHours + ':' + localStartMinutes;
+        this.end_time = localEndHours + ':' + localEndMinutes;
+        this.stags = event.tags;
+        this.dtags = this.alltags.filter( tag => !this.stags.includes(tag))
+        this.event_directions = event.directions;
+        this.event_room = event.room;
+        this.img = event.image_path;
+
+      });
+    }
+
   }
 
   nallert(){
