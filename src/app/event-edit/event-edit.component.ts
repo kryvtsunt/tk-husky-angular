@@ -32,25 +32,26 @@ export class EventEditComponent implements OnInit {
 
   postEvent() {
     console.log("inside postEvent");
-    var toCreateEvent = {
-      title: this.event_name,
-      description: this.event_description,
-      venue : this.event_location,
-      start_time : new Date(this.start_date + 'T' + this.start_time),
-      end_time : new Date(this.end_date + 'T' + this.end_time),
-      overview: this.event_description,
-      last_upd_date:Date.now(),
-      image_path:this.img,
-      tags: this.stags,
-      room: this.event_room,
-      directions: this.event_directions
-    };
+    this.userService.profile().then(user => {
+      var toCreateEvent = {
+        title: this.event_name,
+        description: this.event_description,
+        venue : this.event_location,
+        start_time : new Date(this.start_date + 'T' + this.start_time),
+        end_time : new Date(this.end_date + 'T' + this.end_time),
+        overview: this.event_description,
+        last_upd_date:Date.now(),
+        image_path:this.img,
+        poster: user._id
+      };
 
-    this.eventService.createEvent(toCreateEvent)
-      .then(event => {
-        console.log(event);
-        this.router.navigate(['home']);
-      });
+      this.eventService.createEvent(toCreateEvent)
+        .then(event => {
+          console.log(event);
+          this.router.navigate(['home']);
+        });
+    });
+
   }
 
   resetEvent() {

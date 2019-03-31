@@ -66,13 +66,10 @@ export class EventServiceClient {
         return response.json();
       });
   }
-  findEventsForOrg(OrgId) {
-    return fetch(HOST + 'api/HNbhood/' + OrgId, {
-      method: 'get',
-      headers: {
-        'content-type': 'application/json'
-      }
-    })
+
+  findAllEventsForOrg(orgId) {
+    console.log("OrgId in client Service", orgId);
+    return fetch(HOST + 'api/HNbhood/org/' + orgId)
       .then(response => {
         return response.json();
       });

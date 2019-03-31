@@ -20,16 +20,30 @@ export class OrganizationComponent implements OnInit {
   ngOnInit() {
     this.userService.profile().then(user => {
       this.orgId = user._id;
+      this.findAllUpcomingEvents(this.orgId);
+      this.orgService.findorgById(this.orgId)
+        .then(org => {
+          this.org = org;
+        });
     });
-   console.log(this.orgId);
-
-    this.orgService.findorgById(this.orgId)
-      .then(org => {
-        console.log(org);
-        this.org = org;
-        console.log(this.org);
-      });
   }
+
+  //upcoming Events
+
+  findAllUpcomingEvents(orgId){
+    console.log("inside find all upcoming events")
+    this.eventService.findAllEventsForOrg(orgId)
+      .then((response) => {
+        console.log("inside find all upcoming events111")
+        console.log(response)
+        this.upcomingEvents = response;
+    });
+  }
+
+  // setupcoming(){
+  //   this.events = this.upcomingEvents;
+  // }
+
 
   logout= () => {
     var r = confirm("Are you sure you want to logout!");
@@ -41,5 +55,4 @@ export class OrganizationComponent implements OnInit {
 
     }
   }
-
 }
