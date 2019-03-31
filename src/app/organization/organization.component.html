@@ -144,7 +144,7 @@
         <h5 class="card-title">{{event.title}}</h5>
         <p class="card-text">{{event.description.substring(0,200)}}...</p>
         <a routerLink="../event-edit/{{event._id}}" class="btn btn-primary">Edit</a>
-        <button type="button" onclick="confirmDelete()" class="btn btn-danger" (click)="nallert()">Delete </button>
+        <button type="button" (click) ="confirmDelete(event)" class="btn btn-danger">Delete </button>
       </div>
     </div>
     </div>

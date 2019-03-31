@@ -116,7 +116,7 @@ export class EventEditComponent implements OnInit {
       this.eventService.findEvent(this.eventId)
       .then(event => {
 
-        console.log("To Edit Event", event);
+          console.log("To Edit Event", event);
 
         let localStartDate = new Date(event.start_time);
         let localEndDate = new Date(event.end_time);

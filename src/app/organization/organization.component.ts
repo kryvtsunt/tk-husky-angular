@@ -46,6 +46,14 @@ export class OrganizationComponent implements OnInit {
     });
   }
 
+  confirmDelete = (event) => {
+    console.log("Event Delete", event);
+    this.eventService.deleteEvent(event._id)
+    .then( response => {
+      this.findAllUpcomingEvents(this.orgId);
+    })
+  }
+
   logout= () => {
     var r = confirm("Are you sure you want to logout!");
     if (r == true) {

@@ -36,7 +36,7 @@ export class EventServiceClient {
   }
 
   deleteEvent(EventId) {
-    return fetch(HOST + 'api/HNbhood/Event/' + EventId, {
+    return fetch(HOST + 'api/HNbhood/' + EventId, {
       method: 'delete',
       headers: {
         'content-type': 'application/json'
