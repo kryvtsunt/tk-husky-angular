@@ -55,37 +55,51 @@
             <div class="form-group">
 
                 <div class="col-xs-6">
-                    <label for="event_location">
+                  <div class="row">
+                    <div class="col-4">
+                      <label for="event_location">
                         <h4>Location</h4>
-                    </label>
-                    <input type="email" class="form-control" name="event_location" [(ngModel)]="event_location" id="location" placeholder="Ell Hall"
+                      </label>
+                    </div>
+                    <div class="col-4">
+                    <input class="form-control" name="event_location" [(ngModel)]="event_location" placeholder="Ell Hall"
                         title="enter a location">
+                    </div>
+                    <div class="col-4">
+                      <input class="form-control" name="event_room" [(ngModel)]="event_room" placeholder="Room 123"
+                             title="enter a location">
+                    </div>
+                </div>
                 </div>
             </div>
+          <div class="form-group">
+
+            <div class="col-xs-6">
+              <div class="row">
+                <div class="col-4">
+                  <label for="event_directions">
+                    <h4>Directions</h4>
+                  </label>
+                </div>
+                <div class="col-8">
+                  <textarea class="form-control" name="event_directions" [(ngModel)]="event_directions" placeholder="Second floor of the right wing of the building"
+                            title="enter directions"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
             <div class="col-xs-6 tags">
 
                     <h4>Tags</h4>
 
-                    <ul class="list-unstyled ">
-                      <li class="btn badge badge-success" (click)="nallert()"> Free food </li>
-                      <hr/>
-                       <li class="btn badge badge-dark" (click)="nallert()"> Books </li>
-                       <li class="btn badge badge-dark" (click)="nallert()"> Social </li>
-                       <li class="btn badge badge-dark" (click)="nallert()"> Educational </li>
-                       <li class="btn badge badge-dark" (click)="nallert()"> Art </li>
-                       <li class="btn badge badge-dark" (click)="nallert()"> Writing </li>
-                       <li class="btn badge badge-dark" (click)="nallert()"> Job Opportunity </li>
-                      <li class="btn badge badge-dark" (click)="nallert()"> More tags </li>
-                      <li class="btn badge badge-dark" (click)="nallert()"> More tags </li>
-                      <li class="btn badge badge-dark" (click)="nallert()"> More tags </li>
-                      <li class="btn badge badge-dark" (click)="nallert()"> More tags </li>
-                      <li class="btn badge badge-dark" (click)="nallert()"> More tags </li>
-                      <li class="btn badge badge-dark" (click)="nallert()"> More tags </li>
-                      <li class="btn badge badge-dark" (click)="nallert()"> More tags </li>
+              <ul class="list-unstyled mb-0" >
+                <li class="btn badge badge-success" *ngFor="let tag of stags"(click)="to_dtags(tag)"> {{tag}} </li>
+              </ul>
+              <hr/>
 
-
-
-                    </ul>
+              <ul class="list-unstyled mb-0" >
+                <li class="btn badge badge-dark" *ngFor="let tag of dtags" (click)="to_stags(tag)"> {{tag}} </li>
+              </ul>
             </div>
         </div>
 
@@ -111,37 +125,41 @@
           <!--</div>-->
           <div class="form-group text-center" >
 
-              <div class="col-xs-6" >
-                  <label for="date">
-                      <h4>Date</h4>
+            <div class="col-xs-6" >
+              <div class="row">
+                <div class="col-2">
+                  <label for="date" style="margin-top: 25px">
+                    <h4>Date</h4>
                   </label>
-                  <div class="row">
-                      <div class="col">
-                          Starts <input type="date" class="form-control" name="start_date"
-                              [(ngModel)]="start_date"
-                              id="start-date"
-                              title="enter start date.">
+                </div>
+                <div class="col-5">
+                  Starts <input type="date" class="form-control" name="start_date"
+                                [(ngModel)]="start_date"
+                                id="start-date"
+                                title="enter start date.">
 
-                      </div>
-                      <div class="col">
-                          Ends <input type="date" class="form-control" name="end_date"
+                </div>
+                <div class="col-5">
+                  Ends <input type="date" class="form-control" name="end_date"
                               [(ngModel)]="end_date"
                               id="end-date"
                               title="enter end date">
-                      </div>
-                  </div>
-
+                </div>
               </div>
+
+            </div>
           </div>
-          <br/>
+
           <div class="form-group text-center">
 
               <div class="col-xs-6">
-                  <label for="time">
-                      <h4>Time</h4>
-                  </label>
                   <div class="row">
-                      <div class="col">
+                    <div class="col-2">
+                      <label for="time" style="margin-top: 25px">
+                        <h4>Time</h4>
+                      </label>
+                    </div>
+                      <div class="col-5">
                           Starts <input type="time" class="form-control"
                               name="start_time"
                               [(ngModel)]="start_time"
@@ -149,7 +167,7 @@
                               title="enter start time.">
 
                       </div>
-                      <div class="col">
+                      <div class="col-5">
                           Ends <input type="time" class="form-control"
                               name="end_time"
                               [(ngModel)]="end_time"
@@ -163,7 +181,8 @@
           <br/>
           <div class="col-xs-12">
             <br/>
-              <button id="postEvent" type="submit" class="btn btn-block btn-lg btn-success" (click)="postEvent()" > Post</button>
+              <button id="postEvent" type="submit" *ngIf="!editEvent" class="btn btn-block btn-lg btn-success" (click)="postEvent()" > Post</button>
+              <button id="updateEvent" type="submit" *ngIf="editEvent" class="btn btn-block btn-lg btn-success" (click)="updateEvent()" > Update</button>
               <button id="resetEvent" type="submit" class="btn btn-block btn-lg btn-danger" (click)="resetEvent()"> Reset</button>
           </div>
 

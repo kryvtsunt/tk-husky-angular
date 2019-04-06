@@ -1,8 +1,9 @@
 
 import {Injectable} from '@angular/core';
 
-const HOST = 'https://huskyneighborhood.herokuapp.com/';
-// const HOST = 'http://localhost:4000/';
+
+// const HOST = 'https://huskyneighborhood.herokuapp.com/';
+const HOST = 'http://localhost:4000/';
 
 @Injectable()
 export class EventServiceClient {
@@ -35,7 +36,7 @@ export class EventServiceClient {
   }
 
   deleteEvent(EventId) {
-    return fetch(HOST + 'api/HNbhood/Event/' + EventId, {
+    return fetch(HOST + 'api/HNbhood/' + EventId, {
       method: 'delete',
       headers: {
         'content-type': 'application/json'
@@ -47,7 +48,7 @@ export class EventServiceClient {
   }
 
   updateEvent(EventId, Event) {
-    return fetch(HOST + 'api/HNbhood/Event/' + EventId, {
+    return fetch(HOST + 'api/HNbhood/' + EventId, {
       body: JSON.stringify(Event),
       method: 'put',
       headers: {
@@ -65,13 +66,10 @@ export class EventServiceClient {
         return response.json();
       });
   }
-  findEventsForOrg(OrgId) {
-    return fetch(HOST + 'api/HNbhood/' + OrgId, {
-      method: 'get',
-      headers: {
-        'content-type': 'application/json'
-      }
-    })
+
+  findAllEventsForOrg(orgId) {
+    console.log("OrgId in client Service", orgId);
+    return fetch(HOST + 'api/HNbhood/org/' + orgId)
       .then(response => {
         return response.json();
       });
