@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 
- // const HOST = 'https://huskyneighborhood.herokuapp.com/';
-const HOST = 'http://localhost:4000/';
+  const HOST = 'https://huskyneighborhood.herokuapp.com/';
+//const HOST = 'http://localhost:4000/';
 
 @Injectable()
 export class UserServiceClient {
@@ -11,7 +11,7 @@ export class UserServiceClient {
   }
 
   findUserByCredentials(username, password) {
-    return fetch('http://localhost:4000/api/user/username/' + username + '/password/' + password)
+    return fetch(HOST +'api/user/username/' + username + '/password/' + password)
       .then(response => response.json());
   }
 
