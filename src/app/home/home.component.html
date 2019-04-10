@@ -42,15 +42,30 @@
     <div class="col-md-8">
 
       <br/>
+      <div class="row">
 
-      <div>
-        <button class="btn btn-info dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Filter
+      <div class="col-md-5">
+        <button class="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Sort by: None
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">All</a>
-          <a class="dropdown-item" href="#">Relevant</a>
-          <a class="dropdown-item" href="#">Upcoming</a>
+          <a class="dropdown-item" href="#">None</a>
+          <a class="dropdown-item" href="#">Relevance</a>
+          <a class="dropdown-item" href="#">Event Date</a>
+          <a class="dropdown-item" href="#">Post Date (New)</a>
+        </div>
+      </div>
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-3">
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary active">
+              <input type="radio" name="options" id="option1" autocomplete="off" checked> Upcoming
+            </label>
+            <label class="btn btn-secondary">
+              <input type="radio" name="options" id="option2" autocomplete="off"> Past
+            </label>
+          </div>
         </div>
       </div>
 
@@ -62,35 +77,33 @@
 
         <img class="card-img-top" src="{{event.image_path}}" style=" width: 100%;
     height: 15vw;
-    object-fit: cover;" alt="Card image cap">
+    object-fit: cover;" alt="Event image">
 
-        <div class="card-img-overlay">
-          <span class="badge badge-primary"> Free food </span>
-          <span class="badge badge-secondary"> Books </span>
-          <span class="badge badge-success"> Social </span>
-          <span class="badge badge-danger"> Educational </span>
-          <span class="badge badge-warning"> Art </span>
-          <span class="badge badge-info"> Writing </span>
-          <span class="badge badge-light"> Job Opportunity </span>
-          <span class="badge badge-dark"> Etc </span>
+        <div class="card-img-overlay" >
+          <h4><span class="badge badge-info" *ngFor="let tag of event.tags">{{tag}} </span></h4>
+          <!--<span class="badge badge-secondary"> Books </span>-->
+          <!--<span class="badge badge-success"> Social </span>-->
+          <!--<span class="badge badge-danger"> Educational </span>-->
+          <!--<span class="badge badge-warning"> Art </span>-->
+          <!--<span class="badge badge-info"> Writing </span>-->
+          <!--<span class="badge badge-light"> Job Opportunity </span>-->
+          <!--<span class="badge badge-dark"> Etc </span>-->
         </div>
         <div class="card-img-overlay" style="padding:0px;">
           <div class="float-right hidden-md-up rounded" style="background-color: rgb(240, 241, 242)">
             <div class="text-center">
               <i
-                [ngClass]="event.isBookmarked ? 'btn text-warning fa fa-bookmark fa-2x' : 'btn text-warning far fa-bookmark fa-2x'"
+                [ngClass]="event.isBookmarked ? 'btn text-warning fa fa-bookmark fa-3x' : 'btn text-warning far fa-bookmark fa-3x'"
                 (click)="bookmark(event)"></i>
               <!-- <i *ngSwitchCase="false" (click)="bookmark()" class="btn text-warning far fa-bookmark fa-2x"></i> -->
             </div>
-            <div class="text-center">
-              <i (click)="nallert()" class="btn text-danger far fa-heart fa-2x"></i>
-              <!-- <i *ngSwitchCase="false" (click)="like()" class="btn text-danger far fa-heart fa-2x"></i> -->
-            </div>
+
           </div>
         </div>
         <div class="card card-body">
 
           <h2 class="card-title">{{event.title}}</h2>
+          <h5> {{event.start_time | date:'medium' }}</h5>
           <p class="card-text">{{event.description}}</p>
           <div>
             <button type="button" class=" btn-block btn btn-primary" (click)="viewEvent(event._id)">Read More &rarr;</button>

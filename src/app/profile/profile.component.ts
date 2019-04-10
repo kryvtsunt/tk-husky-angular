@@ -24,6 +24,10 @@ export class ProfileComponent implements OnInit {
   follow: boolean;
   routerLink: string;
   edit: false;
+  img: String;
+  stags: String[];
+  dtags: String[];
+  alltags: String[];
 
 
   constructor(private router: Router, private service: UserServiceClient, private userService: UserServiceClient,
@@ -118,6 +122,12 @@ export class ProfileComponent implements OnInit {
   to_dtags(t){
     this.dtags.push(t);
     this.stags.splice(this.stags.indexOf(t), 1);
+  }
+
+  update(){
+    this.userService.updateUser(this.user);
+    this.edit = !this.edit;
+
   }
 
 

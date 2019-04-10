@@ -74,7 +74,7 @@
           <i class="far fa-edit" ></i> Edit Profile </a>
       </div>
       <div *ngIf="edit" class="col-md-2">
-        <a  routerLink="../profile" class="btn profile-save-btn" (click)="switchMode()">
+        <a  routerLink="../profile" class="btn profile-save-btn" (click)="update()">
           <i class="far fa-save" ></i> Save Profile </a>
         <a  routerLink="../profile" class="btn profile-cancel-btn" (click)="switchMode()">
           <i class="fa fa-times" ></i> Cancel Changes </a>
@@ -129,7 +129,7 @@
               <div class="col-md-9">
                 <p *ngIf="!edit">{{user.name || "None" }}</p>
                 <div *ngIf="edit" class="form-group">
-                <input type="text" class="form-control" placeholder="David Sprague">
+                <input type="text" class="form-control" placeholder="David Sprague" [(ngModel)]="user.name" >
                 </div>
               </div>
             </div>
@@ -140,7 +140,7 @@
               <div class="col-md-9">
                 <p *ngIf="!edit" >{{user.email || "None" }}</p>
                 <div *ngIf="edit" class="form-group">
-                <input type="text" class="form-control" placeholder="{{user.username}}@husky.neu.edu">
+                <input type="text" class="form-control" placeholder="name@husky.neu.edu">
                 </div>
               </div>
             </div>
@@ -151,7 +151,7 @@
               <div class="col-md-9">
                 <p *ngIf="!edit">{{user.phone || "None"}}</p>
                 <div class="form-group" *ngIf="edit">
-                <input type="text" class="form-control" placeholder="123 456 7890">
+                <input type="text" class="form-control" placeholder="123 456 7890" [(ngModel)]="user.phone" >
                 </div>
               </div>
             </div>
@@ -162,7 +162,7 @@
               <div class="col-md-9">
                 <p *ngIf="!edit">{{user.specialization || "None"}}</p>
                 <div *ngIf="edit" class="form-group">
-                <input  class="form-control" placeholder="Web Development and Design">
+                <input  class="form-control" placeholder="Web Development and Design" [(ngModel)]="user.specialization" >
                 </div>
                 </div>
             </div>
@@ -175,7 +175,7 @@
                     {{user.bio || "None"}}
                 </p>
                 <div *ngIf="edit" class="form-group">
-                <textarea cols="66" rows="5" type="text"  placeholder="  I am your next best friend"></textarea>
+                <textarea cols="66" rows="5" type="text"  placeholder="  I am your next best friend" [(ngModel)]="user.bio" ></textarea>
                 </div>
 
               </div>
@@ -188,7 +188,7 @@
               </div>
               <div class="col-md-9">
                 <div  class="form-group">
-                  <input  class="form-control"placeholder="{{user.password}}">
+                  <input  class="form-control"placeholder="qwerty123" [(ngModel)]="user.password" >
                 </div>
               </div>
             </div>
@@ -199,7 +199,7 @@
               </div>
               <div class="col-md-9">
                 <div  class="form-group">
-                  <input  class="form-control" placeholder="{{user.password}}">
+                  <input  class="form-control" placeholder="qwerty123" [(ngModel)]="user.password">
                 </div>
               </div>
             </div>

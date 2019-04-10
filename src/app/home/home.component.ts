@@ -27,15 +27,13 @@ export class HomeComponent implements OnInit {
 
         events.forEach(event => {
           this.bookmarkService.checkBookmark(event._id).then((response)=>{
-            console.log(event._id);
-            console.log(response);
             event.isBookmarked = response;
           } );
 
         });
         console.log(events);
-        this.events = events;
-        this.all = events;
+        this.events = events.slice();
+        this.all = events.slice();
         this.dtags = ["Food", "Academia/Education", "Sport", "Social", "Job & Careers", "Spiritual", "Outdoor", "Music", "Art & Design", "Business", "Engineering", "Health & Wellness", "Law & Politics", "Undergraduate", "Graduate", "Cultural", "Fundraising", "Concert/Show", "Games", "Photo/Video", "Journalism", "Theatre", "Networking", "Free", "Paid"];
         this.stags = [];
       });
