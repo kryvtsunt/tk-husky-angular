@@ -19,6 +19,7 @@ export class OrganizationComponent implements OnInit {
   orgId : String;
   org: {};
   upcomingEvents = [];
+  edit: false;
 
   nallert(){
     alert("The functionality is not implemented yet")
@@ -63,5 +64,9 @@ export class OrganizationComponent implements OnInit {
     } else {
 
     }
+  }
+
+  switchMode() {
+    this.edit = !this.edit;
   }
 }

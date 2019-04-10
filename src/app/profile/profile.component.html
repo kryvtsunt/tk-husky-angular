@@ -27,24 +27,38 @@
   </div>
 </nav>
 
+
 <div class="container emp-profile">
+
+  <div class="alert alert-info alert-dismissible fade show" role="alert">
+    <strong> NB: </strong>   We will help you to find events faster if you tell us about your interests!
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
   <form method="post">
     <div class="row">
       <div class="col-md-4">
         <div class="profile-img">
           <img src="./assets/student.jpg" alt=""/>
+          <div *ngIf="edit" class="file btn btn-lg btn-primary" (click)="editp()">
+            Change Photo
+          </div>
         </div>
       </div>
       <div class="col-md-6">
         <div class="profile-head">
           <h4>
-            Anna Marta
+            {{user.username}}
           </h4>
           <h5>
             Senior BSCS at NEU
           </h5>
 
-          <p class="proile-rating">Social media profile: <a href="https://www.facebook.com/marta.donesk"> <strong> facebook </strong> </a></p>
+          <p *ngIf="!edit" class="proile-rating"> <strong> Facebook: <a href="{{user.facebook}}"> {{user.facebook || "None"}}   </a> </strong></p>
+          <p *ngIf="edit" class="proile-rating"> <strong> Facebook: <input type="text" class="form-control"  placeholder="Your Facebook Url">
+          </strong></p>
 
 
           <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -55,10 +69,17 @@
           </ul>
         </div>
       </div>
-      <div class="col-md-2">
-        <a routerLink="../profile" class="btn profile-edit-btn" (click)="editp()">
-          <i class="far fa-edit"></i> Edit Profile </a>
+      <div *ngIf="!edit" class="col-md-2">
+        <a  routerLink="../profile" class="btn profile-edit-btn" (click)="switchMode()">
+          <i class="far fa-edit" ></i> Edit Profile </a>
       </div>
+      <div *ngIf="edit" class="col-md-2">
+        <a  routerLink="../profile" class="btn profile-save-btn" (click)="switchMode()">
+          <i class="far fa-save" ></i> Save Profile </a>
+        <a  routerLink="../profile" class="btn profile-cancel-btn" (click)="switchMode()">
+          <i class="fa fa-times" ></i> Cancel Changes </a>
+      </div>
+
     </div>
     <div class="row">
       <div class="col-md-4">
@@ -67,15 +88,29 @@
 
 
           <p>INTERESTS</p>
-          <ul class="list-unstyled mb-0">
-            <li class="btn badge badge-light"> Web Design </li>
-            <li class="btn badge badge-light"> Games </li>
-            <li class="btn badge badge-light"> Books </li>
-            <li class="btn badge badge-light"> Sci-fi </li>
-            <li class="btn badge badge-light"> Cinema </li>
-            <li class="btn badge badge-light"> Craft </li>
 
-          </ul>
+          <div class="alert alert-warning" role="alert">
+            Please press 'Edit Profile' button on the top right corner and add some interests.
+          </div>
+
+
+          <div *ngIf="!edit">
+            <ul class="list-unstyled mb-0" >
+              <li class="btn badge badge-light" *ngFor="let tag of stags"> {{tag}} </li>
+            </ul>
+          </div>
+
+          <div *ngIf="edit">
+            <ul class="list-unstyled mb-0" >
+              <li class="btn badge badge-light" *ngFor="let tag of stags"(click)="to_dtags(tag)"> {{tag}} </li>
+            </ul>
+            <hr/>
+
+            <ul class="list-unstyled mb-0" >
+              <li class="btn badge badge-dark text-white" *ngFor="let tag of dtags" (click)="to_stags(tag)"> {{tag}} </li>
+            </ul>
+          </div>
+
 
 
 
@@ -92,7 +127,10 @@
                 <label>Name</label>
               </div>
               <div class="col-md-9">
-                <p>Kshiti Ghelani</p>
+                <p *ngIf="!edit">{{user.name || "None" }}</p>
+                <div *ngIf="edit" class="form-group">
+                <input type="text" class="form-control" placeholder="David Sprague">
+                </div>
               </div>
             </div>
             <div class="row">
@@ -100,7 +138,10 @@
                 <label>Email</label>
               </div>
               <div class="col-md-9">
-                <p>kshitighelani@gmail.com</p>
+                <p *ngIf="!edit" >{{user.email || "None" }}</p>
+                <div *ngIf="edit" class="form-group">
+                <input type="text" class="form-control" placeholder="{{user.username}}@husky.neu.edu">
+                </div>
               </div>
             </div>
             <div class="row">
@@ -108,29 +149,58 @@
                 <label>Phone</label>
               </div>
               <div class="col-md-9">
-                <p>123 456 7890</p>
+                <p *ngIf="!edit">{{user.phone || "None"}}</p>
+                <div class="form-group" *ngIf="edit">
+                <input type="text" class="form-control" placeholder="123 456 7890">
+                </div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-3">
-                <label>Profession</label>
+                <label>Specialization</label>
               </div>
               <div class="col-md-9">
-                <p>Web Developer and Designer</p>
-              </div>
+                <p *ngIf="!edit">{{user.specialization || "None"}}</p>
+                <div *ngIf="edit" class="form-group">
+                <input  class="form-control" placeholder="Web Development and Design">
+                </div>
+                </div>
             </div>
             <div class="row">
               <div class="col-md-3">
                 <label>Bio</label>
               </div>
               <div class="col-md-9">
-                <p>
-                  Lorem ipsum dolor sit amet, vim nostrud vocibus interesset ne.
-                  Possim ullamcorper necessitatibus vel ne, per cu harum tempor.
-                  Mea legere utamur habemus cu, quaeque mediocritatem no usu.
-                  Id vim minim adipisci concludaturque, has magna atomorum dissentias ea,
-                  no pri impetus meliore. Mea suas partem ocurreret ei, eam ut viderer fabulas. Ludus constituto sed id.
+                <p *ngIf="!edit">
+                    {{user.bio || "None"}}
                 </p>
+                <div *ngIf="edit" class="form-group">
+                <textarea cols="66" rows="5" type="text"  placeholder="  I am your next best friend"></textarea>
+                </div>
+
+              </div>
+            </div>
+            <br/>
+            <br/>
+            <div class="row" *ngIf="edit">
+              <div class="col-md-3">
+                <label>Password</label>
+              </div>
+              <div class="col-md-9">
+                <div  class="form-group">
+                  <input  class="form-control"placeholder="{{user.password}}">
+                </div>
+              </div>
+            </div>
+
+            <div class="row" *ngIf="edit">
+              <div class="col-md-3">
+                <label>Verify Password</label>
+              </div>
+              <div class="col-md-9">
+                <div  class="form-group">
+                  <input  class="form-control" placeholder="{{user.password}}">
+                </div>
               </div>
             </div>
 
@@ -141,7 +211,7 @@
       </div>
     </div>
 </form>
-  <div class="bookmarked">
+  <div class="bookmarked" *ngIf="!edit">
     <ul class="nav nav-tabs" id="eventsTab" role="tablist">
       <li class="nav-item">
         <a (click)="setbookmarked()" class="nav-link active"  data-toggle="tab" role="tab"

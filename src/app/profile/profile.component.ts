@@ -17,12 +17,14 @@ export class ProfileComponent implements OnInit {
   edit: boolean;
   originalUser: User = new User();
   admin: boolean;
-  bookmarkedEvents = []
-  registeredEvenets = []
+  bookmarkedEvents = [];
+  registeredEvenets = [];
   events = [];
   followings = [];
   follow: boolean;
   routerLink: string;
+  edit: false;
+
 
   constructor(private router: Router, private service: UserServiceClient, private userService: UserServiceClient,
               private bookmarkService: BookmarkServiceClient, private registerService: LikeServiceClient) { }
@@ -44,6 +46,9 @@ export class ProfileComponent implements OnInit {
   //     })
   // }
   ngOnInit() {
+    this.dtags = ["Food", "Academia / Education", "Sports", "Social", "Job / Career", "Spiritual / Ethics", "Outdoor", "Music", "Dance", "Art / Design", "Business", "Engineering", "Health / Wellness", "Law / Politics", "Undergraduate", "Graduate", "Culture", "Fundraiser", "Concert / Show", "Games / Entertainment", "Journalism", "Theatre", "Networking", "Cinematography", "Tech / Innovations", "Charity", "Lecture / Talk", "Competition / Contest", "Environment / Sustainability", "Motivation / Inspiration", "Workshop"];
+    this.stags = [];
+    this.alltags = this.dtags.slice();
     this.service.profile()
       .then(user => {
           // this.service.findUserByUsername(user.username)
@@ -100,5 +105,21 @@ export class ProfileComponent implements OnInit {
 
     }
   }
+
+  switchMode() {
+    this.edit = !this.edit;
+  }
+
+  to_stags(t){
+    this.stags.push(t);
+    this.dtags.splice(this.dtags.indexOf(t), 1);
+  }
+
+  to_dtags(t){
+    this.dtags.push(t);
+    this.stags.splice(this.stags.indexOf(t), 1);
+  }
+
+
 
 }

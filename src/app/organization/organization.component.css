@@ -58,6 +58,28 @@ body{
   color: #818182;
   margin-top: 5%;
 }
+
+.profile-save-btn{
+  border: none;
+  border-radius: 1.5rem;
+  width: 70%;
+  padding: 2%;
+  font-weight: 600;
+  color: #007d09;
+  cursor: pointer;
+}
+
+.profile-cancel-btn{
+  border: none;
+  border-radius: 1.5rem;
+  width: 70%;
+  padding: 2%;
+  font-weight: 600;
+  color: #7d0005;
+  cursor: pointer;
+  margin-top: 10px
+}
+
 .proile-rating span{
   color: #495057;
   font-size: 15px;
