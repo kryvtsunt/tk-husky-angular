@@ -23,8 +23,6 @@ export class HomeComponent implements OnInit {
   itags: boolean;
   today: Date;
   day: Date;
-  stags: string[];
-  dtags: string[];
   alltags: string[];
   events = [];
   all = []

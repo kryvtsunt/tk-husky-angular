@@ -67,7 +67,7 @@
           <i class="far fa-edit" ></i> Edit Profile </a>
       </div>
       <div *ngIf="edit" class="col-md-2">
-        <a  routerLink="../organization" class="btn profile-save-btn" (click)="switchMode()">
+        <a  routerLink="../organization" class="btn profile-save-btn" (click)="update()">
           <i class="far fa-save" ></i> Save Profile </a>
         <a  routerLink="../organization" class="btn profile-cancel-btn" (click)="switchMode()">
           <i class="fa fa-times" ></i> Cancel Changes </a>
@@ -79,10 +79,10 @@
           <div style="word-break: break-all; word-wrap: break-word;">
             <p>WEBSITE</p>
             <div *ngIf="!edit" ><a
-              href="https://www.facebook.com/NEUFictionAddiction/">https://www.facebook.com/NEUFictionAddiction/</a>
+              href="https://www.facebook.com/NEUFictionAddiction/">{{user.facebook}}</a>
             </div>
             <div *ngIf="edit" class="form-group">
-              <input type="text" class="form-control" placeholder="NEUFictionAddiction">
+              <input type="text" class="form-control" placeholder="NEUFictionAddiction" name="facebook" [(ngModel)]="user.facebook">
             </div>
             <br />
           </div>
@@ -94,41 +94,69 @@
           <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
             <div class="row">
-              <div class="col-md-12">
-                <p *ngIf="!edit" style="color:black">Fiction Addiction is a book club for all Northeastern
-                  students. We plan on
-                  reading one work a month and having bi-monthly meetings to discuss it. Contrary
-                  to the name of the club, we will not be limiting ourselves to fiction. Votes
-                  will be cast by all members of the club to determine what we read each month. We
-                  also anticipate holding fun events for members, such as bringing local authors
-                  in to speak about their books or participating in activities related to the
-                  books we are reading. This club is for anyone who has an interest in reading or
-                  enjoys discussing literary topics with others.</p>
+              <div class="col-md-3">
+                <label>OrgName</label>
+              </div>
+              <div class="col-md-9">
+                <p class="text-info" *ngIf="!edit">{{user.username}}</p>
                 <div *ngIf="edit" class="form-group">
-                  <textarea cols="80" rows="5" type="text"  placeholder="Organization Description"></textarea>
+                  <input type="text" class="form-control"  name="userName" [(ngModel)]="user.username" placeholder="Organization name">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-3">
+                <label>Description</label>
+              </div>
+              <div class="col-md-9">
+                <p *ngIf="!edit" class="text-info">{{user.bio}}</p>
+                <div *ngIf="edit" class="form-group">
+                  <textarea cols="65" rows="5" type="text"  placeholder="Organization Description" name="bio" [(ngModel)]="user.bio"></textarea>
                 </div>
               </div>
             </div>
             <br />
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-3">
                 <label>Email</label>
               </div>
-              <div class="col-md-6">
-                <p class="text-info" *ngIf="!edit">NEUFictionAddiction@gmail.com</p>
+              <div class="col-md-9">
+                <p class="text-info" *ngIf="!edit">{{user.email}}</p>
                 <div *ngIf="edit" class="form-group">
-                  <input type="text" class="form-control" placeholder="NEUFictionAddiction@gmail.com">
+                  <input type="text" class="form-control"  name="email" [(ngModel)]="user.email" placeholder="NEUFictionAddiction@gmail.com">
                 </div>
               </div>
             </div>
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-3">
                 <label>Phone</label>
               </div>
-              <div class="col-md-6">
-                <p class="text-info" *ngIf="!edit">123 456 7890</p>
+              <div class="col-md-9">
+                <p class="text-info" *ngIf="!edit">{{user.phone}}</p>
                 <div *ngIf="edit" class="form-group">
-                  <input type="text" class="form-control" placeholder="123 456 7890">
+                  <input type="text" class="form-control" name="phone" [(ngModel)]="user.phone" placeholder="123 456 7890">
+                </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="edit">
+              <div class="col-md-3">
+                <label>Password</label>
+              </div>
+              <div class="col-md-9">
+                <div  class="form-group">
+                  <input  class="form-control" name="password" placeholder="qwerty123" [(ngModel)]="user.password" >
+                </div>
+              </div>
+            </div>
+
+            <div class="row" *ngIf="edit">
+              <div class="col-md-3">
+                <label>Verify Password</label>
+              </div>
+              <div class="col-md-9">
+                <div  class="form-group">
+                  <input  class="form-control" name="vpassword" placeholder="qwerty123" [(ngModel)]="user.password">
                 </div>
               </div>
             </div>

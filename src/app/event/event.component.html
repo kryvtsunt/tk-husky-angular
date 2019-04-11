@@ -39,18 +39,16 @@
       <!-- Blog Post -->
       <div class="card mb-4">
 
-        <img class="card-img-top" src="assets/book-love.jpeg" alt="Card image cap">
+        <img class="card-img-top" src="{{event.image_path}}" alt="Event image" style=" width: 100%;
+    height: 15vw;
+    object-fit: cover;">
         <div class="card-img-overlay" style="padding:0px;">
           <div class="float-right hidden-md-up rounded"
                style="background-color: rgb(240, 241, 242)">
             <div class="text-center">
-              <i   [ngClass]="this.bookmarked ? 'btn text-warning fa fa-bookmark fa-2x' : 'btn text-warning far fa-bookmark fa-2x'"
+              <i   [ngClass]="this.bookmarked ? 'btn text-warning fa fa-bookmark fa-3x' : 'btn text-warning far fa-bookmark fa-3x'"
                    (click)="bookmarkEvent()"></i>
               <!-- <i *ngSwitchCase="false" (click)="bookmark()" class="btn text-warning far fa-bookmark fa-2x"></i> -->
-            </div>
-            <div  class="text-center">
-              <i (click)="nallert()" class="btn text-danger far fa-heart fa-2x"></i>
-              <!-- <i *ngSwitchCase="false" (click)="like()" class="btn text-danger far fa-heart fa-2x"></i> -->
             </div>
           </div>
         </div>
@@ -60,6 +58,54 @@
           <p class="card-text">{{event.description}}</p>
           <!-- <a href="#" class="btn btn-primary">Read More &rarr;</a> -->
         </div>
+      </div>
+
+      <div>
+
+        <!-- <p><strong>User 1:</strong> This seems interesting. </p>
+        <p><strong>Ram:</strong> Hi I will attend this event. </p>
+        <p> <b id='comments'></b> </p> -->
+        <h2 style="margin-bottom: 15px"> Reviews </h2>
+
+        <div class="input-group">
+          <input type='text' class="form-control" id='userInput' name= "comment" [(ngModel)] ="comment" placeholder='Enter Text Here' />
+          <input type='button' class="btn btn-primary md-2"  (click)='addComment()' value='Post a comment'/>
+        </div>
+        <br/>
+        <div *ngIf="comments.length > 0">
+          <div *ngFor="let commentObj of comments">
+            <div class="row text-center shadow-lg p-3 mb-5 bg-white rounded" style="padding: 5px; margin: 5px;">
+
+              <div class="col-md-2 rounded " style="padding: 20px">
+                <!--<div class="">-->
+                <img  src="./assets/1600.png" width="80px">
+                <h5>{{commentObj.user.username}}</h5>
+                <!--</div>-->
+              </div>
+              <div class="col-md-8 bg-light" style="padding: 0px 0px;">
+
+                <br/>
+                <h5 style="margin: 20px"> {{commentObj.comment}} </h5>
+                <br/>
+                <br/>
+              </div>
+              <!--<div class="col-md-1">-->
+              <!--<button class="btn btn-lg btn-block btn-danger fa fa-times fa-lg"></button>-->
+              <!--</div>-->
+              <div class="col-md-2 rounded" style="padding: 20px">
+                <button *ngIf= "commentObj.user.username == user.username" type="button" class="btn btn-danger" (click)="deleteComment(commentObj)">Delete </button>
+                <!--<div class="">-->
+                <h6><em>{{commentObj.date  | date:'mediumDate'}}</em></h6>
+                <br/>
+                <br/>
+                <!--</div>-->
+              </div>
+            </div>
+          </div>
+        </div>
+        <br/>
+
+
       </div>
 
 
@@ -78,12 +124,13 @@
       <div class="card-body">
         <p>Click to find the building ⇒ <a href="https://www.northeastern.edu/campusmap/map/">Campus Map </a></p>
         <p> <strong>WHERE?</strong> {{event.venue}}
-        <p> <strong>WHEN?</strong> {{event.start_time | date:'medium'}} to {{event.end_time  | date:'medium'}}
+        <p> <strong>WHEN?</strong> {{event.start_time | date:'medium'}}
+        <!--to {{event.end_time  | date:'medium'}}-->
           <!-- <a href="#" class="btn btn-primary">Read More &rarr;</a> -->
       </div>
       <div class="card-footer" id="register">
 
-        <button class="btn btn-primary btn-block" [ngClass]="{'btn-danger': liked}" (click)="registerForEvent(event._id)" >
+        <button class="btn btn-success btn-block" [ngClass]="{'btn-danger': liked}" (click)="registerForEvent(event._id)" >
           {{registerBtnText}}
         </button>
         <br/>
@@ -92,80 +139,44 @@
         <p><img src="img/paw2.jpg" width=20px/> User3 -->
         <span>
            <span class="btn btn-sm">
-           <img class="d-flex justify-content-start" src="./assets/1600.png" width="50px">
-           <strong class="float-left">Name</strong>
+           <img class="d-flex justify-content-start" src="./assets/1400.png" width="50px">
+           <strong class="float-left">kryvts.t</strong>
            </span>
            <span class="btn btn-sm">
-           <img class="d-flex justify-content-start" src="./assets/1600.png" width="50px">
-           <strong class="float-left">Name</strong>
+           <img class="d-flex justify-content-start" src="./assets/1300.png" width="50px">
+           <strong class="float-left">chaud.s</strong>
            </span>
            <span class="btn btn-sm">
-           <img class="d-flex justify-content-start" src="./assets/1600.png" width="50px">
-           <strong class="float-left">Name</strong>
+           <img class="d-flex justify-content-start" src="./assets/1700.png" width="50px">
+           <strong class="float-left">karn.v</strong>
            </span>
            <span class="btn btn-sm">
-           <img class="d-flex justify-content-start" src="./assets/1600.png" width="50px">
-           <strong class="float-left">Name</strong>
+           <img class="d-flex justify-content-start" src="./assets/1200.png" width="50px">
+           <strong class="float-left">nair.rit</strong>
+           </span>
+           <span class="btn btn-sm" *ngIf="liked">
+           <img class="d-flex justify-content-start" src="./assets/1600.png" width="60px">
+           <strong class="float-left">{{user.username}}</strong>
            </span>
 
          </span>
-      </div>
-
-    </div>
-
-
-
-
-
-  </div>
-
-  <div>
-
-    <!-- <p><strong>User 1:</strong> This seems interesting. </p>
-    <p><strong>Ram:</strong> Hi I will attend this event. </p>
-    <p> <b id='comments'></b> </p> -->
-    <h2 style="margin-bottom: 15px"> Reviews </h2>
-
-    <div class="input-group">
-      <input type='text' class="form-control" id='userInput' name= "comment" [(ngModel)] ="comment" placeholder='Enter Text Here' />
-      <input type='button' class="btn btn-primary md-2"  (click)='addComment()' value='Post a comment'/>
-    </div>
-    <br/>
-    <div *ngIf="comments.length > 0">
-      <div *ngFor="let commentObj of comments">
-        <div class="row text-center shadow-lg p-3 mb-5 bg-white rounded" style="padding: 5px; margin: 5px;">
-
-          <div class="col-md-2 rounded " style="padding: 20px">
-            <!--<div class="">-->
-            <img  src="./assets/1600.png" width="80px">
-            <h5>{{commentObj.user.username}}</h5>
-            <!--</div>-->
-          </div>
-          <div class="col-md-8 bg-light" style="padding: 0px 0px;">
-
-            <br/>
-            <h5 style="margin: 20px"> {{commentObj.comment}} </h5>
-            <br/>
-            <br/>
-          </div>
-          <!--<div class="col-md-1">-->
-          <!--<button class="btn btn-lg btn-block btn-danger fa fa-times fa-lg"></button>-->
-          <!--</div>-->
-          <div class="col-md-2 rounded" style="padding: 20px">
-            <button *ngIf= "commentObj.user.username == user.username" type="button" class="btn btn-danger" (click)="deleteComment(commentObj)">Delete </button>
-            <!--<div class="">-->
-            <h6><em>{{commentObj.date  | date:'mediumDate'}}</em></h6>
-            <br/>
-            <br/>
-            <!--</div>-->
-          </div>
+        <div>
+        <i class="small card card-footer"> List of registered users (mocked). </i>
         </div>
       </div>
+
+
+
+
     </div>
-    <br/>
+
+
+
 
 
   </div>
+
+
 
 </div>
 <!-- /.row -->

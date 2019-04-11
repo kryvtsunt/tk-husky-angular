@@ -18,6 +18,7 @@ export class OrganizationComponent implements OnInit {
 
   orgId : String;
   org: {};
+  user: {};
   upcomingEvents = [];
   edit = false;
 
@@ -27,10 +28,12 @@ export class OrganizationComponent implements OnInit {
   ngOnInit() {
     this.userService.profile().then(user => {
       this.orgId = user._id;
+      this.user = user;
       this.findAllUpcomingEvents(this.orgId);
       this.orgService.findorgById(this.orgId)
         .then(org => {
           this.org = org;
+
         });
     });
   }
@@ -68,5 +71,10 @@ export class OrganizationComponent implements OnInit {
 
   switchMode() {
     this.edit = !this.edit;
+  }
+
+  update(){
+  this.userService.updateUser(this.user);
+  this.edit = !this.edit;
   }
 }
