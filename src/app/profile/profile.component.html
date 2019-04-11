@@ -30,7 +30,7 @@
 
 <div class="container emp-profile">
 
-  <div class="alert alert-info alert-dismissible fade show" role="alert">
+  <div *ngIf="user.tags.length <= 0" class="alert alert-info alert-dismissible fade show" role="alert">
     <strong> NB: </strong>   We will help you to find events faster if you tell us about your interests!
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
@@ -49,15 +49,15 @@
       </div>
       <div class="col-md-6">
         <div class="profile-head">
-          <h4>
+          <h3>
             {{user.username}}
-          </h4>
+          </h3>
           <h5>
             Senior BSCS at NEU
           </h5>
 
-          <p *ngIf="!edit" class="proile-rating"> <strong> Facebook: <a href="{{user.facebook}}"> {{user.facebook || "None"}}   </a> </strong></p>
-          <p *ngIf="edit" class="proile-rating"> <strong> Facebook: <input type="text" class="form-control"  placeholder="Your Facebook Url">
+          <a *ngIf="!edit" class="btn btn-primary" href="{{user.facebook}}"> <i class="fab fa-facebook-f"> </i> Facebook</a>
+          <p *ngIf="edit" class="proile-rating"> <strong> Facebook: <input type="text" class="form-control"  name="facebook" [(ngModel)]="user.facebook" placeholder="Your Facebook Url">
           </strong></p>
 
 
@@ -89,7 +89,7 @@
 
           <p>INTERESTS</p>
 
-          <div class="alert alert-warning" role="alert">
+          <div *ngIf="user.tags.length <= 0" class="alert alert-warning" role="alert">
             Please press 'Edit Profile' button on the top right corner and add some interests.
           </div>
 
@@ -127,9 +127,9 @@
                 <label>Name</label>
               </div>
               <div class="col-md-9">
-                <p *ngIf="!edit">{{user.name || "None" }}</p>
+                <p *ngIf="!edit">{{user.name || "None"}}</p>
                 <div *ngIf="edit" class="form-group">
-                <input type="text" class="form-control" placeholder="David Sprague" [(ngModel)]="user.name" >
+                <input type="text" class="form-control" placeholder="David Sprague" name="name" [(ngModel)]="user.name" >
                 </div>
               </div>
             </div>
@@ -140,7 +140,7 @@
               <div class="col-md-9">
                 <p *ngIf="!edit" >{{user.email || "None" }}</p>
                 <div *ngIf="edit" class="form-group">
-                <input type="text" class="form-control" placeholder="name@husky.neu.edu">
+                <input type="text" class="form-control" name="email" placeholder="name@husky.neu.edu" [(ngModel)]="user.email">
                 </div>
               </div>
             </div>
@@ -151,7 +151,7 @@
               <div class="col-md-9">
                 <p *ngIf="!edit">{{user.phone || "None"}}</p>
                 <div class="form-group" *ngIf="edit">
-                <input type="text" class="form-control" placeholder="123 456 7890" [(ngModel)]="user.phone" >
+                <input type="text" class="form-control" name="phone" placeholder="123 456 7890" [(ngModel)]="user.phone" >
                 </div>
               </div>
             </div>
@@ -162,7 +162,7 @@
               <div class="col-md-9">
                 <p *ngIf="!edit">{{user.specialization || "None"}}</p>
                 <div *ngIf="edit" class="form-group">
-                <input  class="form-control" placeholder="Web Development and Design" [(ngModel)]="user.specialization" >
+                <input  class="form-control" name="specialization" placeholder="Web Development and Design" [(ngModel)]="user.specialization" >
                 </div>
                 </div>
             </div>
@@ -175,7 +175,7 @@
                     {{user.bio || "None"}}
                 </p>
                 <div *ngIf="edit" class="form-group">
-                <textarea cols="66" rows="5" type="text"  placeholder="  I am your next best friend" [(ngModel)]="user.bio" ></textarea>
+                <textarea cols="66" rows="5" type="text"  name="bio" placeholder="  I am your next best friend" [(ngModel)]="user.bio" ></textarea>
                 </div>
 
               </div>
@@ -188,7 +188,7 @@
               </div>
               <div class="col-md-9">
                 <div  class="form-group">
-                  <input  class="form-control"placeholder="qwerty123" [(ngModel)]="user.password" >
+                  <input  class="form-control" name="password" placeholder="qwerty123" [(ngModel)]="user.password" >
                 </div>
               </div>
             </div>
@@ -199,7 +199,7 @@
               </div>
               <div class="col-md-9">
                 <div  class="form-group">
-                  <input  class="form-control" placeholder="qwerty123" [(ngModel)]="user.password">
+                  <input  class="form-control" name="vpassword" placeholder="qwerty123" [(ngModel)]="user.password">
                 </div>
               </div>
             </div>

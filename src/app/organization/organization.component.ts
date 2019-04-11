@@ -19,7 +19,7 @@ export class OrganizationComponent implements OnInit {
   orgId : String;
   org: {};
   upcomingEvents = [];
-  edit: false;
+  edit = false;
 
   nallert(){
     alert("The functionality is not implemented yet")

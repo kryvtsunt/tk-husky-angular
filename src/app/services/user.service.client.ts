@@ -40,7 +40,7 @@ export class UserServiceClient {
   }
 
   updateUser(user) {
-    return fetch(HOST + 'api/HNbhood/user', {
+    return fetch(HOST + 'api/HNbhood/user/update', {
       body: JSON.stringify(user),
       credentials: 'include',
       method: 'put',

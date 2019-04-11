@@ -12,9 +12,8 @@ import {LikeServiceClient} from "../services/like.service.client";
 })
 export class ProfileComponent implements OnInit {
 
-  user: User = new User();
+  user: {};
   profile: boolean;
-  edit: boolean;
   originalUser: User = new User();
   admin: boolean;
   bookmarkedEvents = [];
@@ -23,7 +22,7 @@ export class ProfileComponent implements OnInit {
   followings = [];
   follow: boolean;
   routerLink: string;
-  edit: false;
+  edit = false;
   img: String;
   stags: String[];
   dtags: String[];
@@ -55,9 +54,8 @@ export class ProfileComponent implements OnInit {
     this.alltags = this.dtags.slice();
     this.service.profile()
       .then(user => {
-          // this.service.findUserByUsername(user.username)
-            //.then(u => {
-              this.user = user;//Object.assign({}, u);
+              this.user = Object.assign({}, user);
+              this.user.tags.forEach((tag) => {this.to_stags(tag)})
               if (user.role === 'user') {
                 this.admin = true;
               } else {
@@ -65,7 +63,6 @@ export class ProfileComponent implements OnInit {
               }
               this.findAllBookmarkedEvents();
               this.findAllRegisteredEvents();
-          //  });
       })
   }
 
@@ -125,6 +122,7 @@ export class ProfileComponent implements OnInit {
   }
 
   update(){
+    this.user.tags = this.stags.slice();
     this.userService.updateUser(this.user);
     this.edit = !this.edit;
 
