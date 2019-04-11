@@ -44,28 +44,33 @@
       <br/>
       <div class="row">
 
-      <div class="col-md-5">
-        <button class="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Sort by: None
+      <div class="col-md-4">
+        <button class="btn btn-primary dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Sort by
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">None</a>
-          <a class="dropdown-item" href="#">Relevance</a>
-          <a class="dropdown-item" href="#">Event Date</a>
-          <a class="dropdown-item" href="#">Post Date (New)</a>
+          <button class="dropdown-item" (click)="sort_relevance()">Relevance (Interesting first)</button>
+          <button class="dropdown-item" (click)="sort_upcoming()">Event Date (Upcoming first)</button>
+          <button class="dropdown-item" (click)="sort_post()">Post Date (New first)</button>
+          <button class="dropdown-item" (click)="refresh_events()"> None </button>
         </div>
       </div>
-        <div class="col-md-4">
-        </div>
-        <div class="col-md-3">
+
+        <div class="col-md-5">
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-secondary active">
-              <input type="radio" name="options" id="option1" autocomplete="off" checked> Upcoming
+            <label class="btn btn-secondary active" (click)="alle()">
+              <input type="radio" name="options" id="option1" autocomplete="off" checked >All
             </label>
-            <label class="btn btn-secondary">
-              <input type="radio" name="options" id="option2" autocomplete="off"> Past
+            <label class="btn btn-secondary" (click)="new_events()">
+              <input type="radio" name="options" id="option2" autocomplete="off">Upcoming
+            </label>
+            <label class="btn btn-secondary" (click)="old_events()">
+              <input type="radio" name="options" id="option3" autocomplete="off" >Past
             </label>
           </div>
+        </div>
+        <div class="col-md-3">
+          <button class="btn btn-danger" (click)="cancel_all()"> Remove all filters</button>
         </div>
       </div>
 
@@ -130,13 +135,15 @@
           <div class="input-group">
             <input  [(ngModel)]="this.word" type="text" class="form-control" placeholder="Input the word to search">
             <span class="input-group-btn">
-                <button (click)="search()" class="btn btn-secondary" type="button">Go</button>
+                <button (click)="search_title()" class="btn btn-secondary" type="button">Go</button>
               </span>
           </div>
+          <div *ngIf="hword != ''">
           <hr/>
           <span>
-          Search results for:  <i> word </i> <i class="btn btn-sm btn-outline-danger fa fa-times d-flex float-right" style="margin-right: 15px;"> </i>
+          Results for:  <i> {{hword}} </i> <i class="btn btn-sm btn-outline-danger fa fa-times d-flex float-right" style="margin-right: 15px;" (click)="cancel_title()"> </i>
           </span>
+          </div>
         </div>
 
       </div>
@@ -146,10 +153,16 @@
         <div class="card-body">
           <div class="input-group">
             <input type="date" class="form-control" name="date" id="date"
-                   title="enter date" disabled>
+                   title="enter date" [(ngModel)]="this.day">
             <span class="input-group-btn">
-                <button class="btn btn-secondary" type="button" disabled>Go</button>
+                <button (click)="search_date()" class="btn btn-secondary" type="button" >Go</button>
               </span>
+          </div>
+          <div *ngIf="hday != null">
+            <hr/>
+            <span>
+          Results for:  <i> {{hday}} </i> <i class="btn btn-sm btn-outline-danger fa fa-times d-flex float-right" style="margin-right: 15px;" (click)="cancel_date()"> </i>
+          </span>
           </div>
 
 
@@ -163,13 +176,35 @@
         <div class="card-body">
           <div class="row">
             <div class="col-md-9">
+                            <span class="d-flex float-left" *ngIf="stags.length > 0">
 
+              <i> {{day}} </i> <i class="btn btn-sm btn-light fas fa-sync d-flex float-right" style="margin-right: 15px;" (click)="cancel_tags()"> </i>
 
+                            </span>
             </div>
             <div class="col-md-3">
               <span class="d-flex float-right">
-                <button class="btn btn-secondary" type="button" disabled>Go</button>
+                <button class="btn btn-secondary" type="button" (click)="search_tags()">Go</button>
               </span>
+            </div>
+            <div>
+              <ul class="list-unstyled mb-0" >
+                <li class="btn badge badge-light" *ngFor="let tag of stags"(click)="to_dtags(tag)"> {{tag}} </li>
+              </ul>
+              <hr/>
+              <ul class="list-unstyled mb-0" >
+                <li class="btn badge badge-dark" *ngFor="let tag of dtags"(click)="to_stags(tag)"> {{tag}} </li>
+              </ul>
+            </div>
+
+            <div *ngIf="htags.length > 0 " class="row" style="margin-top: 20px">
+              <div class="col-md-10">
+          <span>Results for:  <ul class="list-unstyled mb-0"><li *ngFor="let tag of htags" class="badge">{{tag}}</li></ul>
+          </span>
+              </div>
+              <div class="col-md-2">
+              <i class="btn btn-sm btn-outline-danger fa fa-times" style="margin-right: 15px;" (click)="cancel_tags()"> </i>
+              </div>
             </div>
           <!--<div class="input-group">-->
             <!--<input type="text" class="form-control" disabled>-->

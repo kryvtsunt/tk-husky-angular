@@ -12,9 +12,8 @@ import {LikeServiceClient} from "../services/like.service.client";
 })
 export class ProfileComponent implements OnInit {
 
-  user: {};
+  user: User = new User();
   profile: boolean;
-  originalUser: User = new User();
   admin: boolean;
   bookmarkedEvents = [];
   registeredEvenets = [];
@@ -55,7 +54,7 @@ export class ProfileComponent implements OnInit {
     this.service.profile()
       .then(user => {
               this.user = Object.assign({}, user);
-              this.user.tags.forEach((tag) => {this.to_stags(tag)})
+              this.user.interests.forEach((tag) => {this.to_stags(tag)})
               if (user.role === 'user') {
                 this.admin = true;
               } else {
@@ -122,7 +121,7 @@ export class ProfileComponent implements OnInit {
   }
 
   update(){
-    this.user.tags = this.stags.slice();
+    this.user.interests = this.stags.slice();
     this.userService.updateUser(this.user);
     this.edit = !this.edit;
 

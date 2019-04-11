@@ -95,7 +95,7 @@ export class EventEditComponent implements OnInit {
     this.start_time = '';
     this.end_time = '';
     this.stags = [];
-    this.dtags = this.alltags.slice();
+    this.dtags = [];
     this.event_directions = "";
     this.event_room = "";
     this.img = "./assets/library.jpeg"

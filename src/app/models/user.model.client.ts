@@ -3,4 +3,7 @@ export class User {
   username: string;
   password: string;
   email: string;
+  name: string;
+  tags: string[];
+  bio: string;
 }
