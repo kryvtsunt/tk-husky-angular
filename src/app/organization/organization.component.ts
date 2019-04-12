@@ -75,6 +75,7 @@ export class OrganizationComponent implements OnInit {
 
   switchMode() {
     this.edit = !this.edit;
+    console.log(this.user)
   }
 
   update(){

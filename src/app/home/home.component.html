@@ -36,7 +36,7 @@
 <!-- Page Content -->
 <div class="container" style="padding-top: 56px;">
   <br/>
-  <div *ngIf="user.interests.length <= 0" class="alert alert-info alert-dismissible fade show" role="alert">
+  <div *ngIf="user.interests.length <= 0 && !org" class="alert alert-info alert-dismissible fade show" role="alert">
     <strong> NB: </strong>   We will help you to find events faster if you tell us about your interests! Go to your Profile to add interests.
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
@@ -186,7 +186,7 @@
             <div class="col-md-9">
                             <span class="d-flex float-left" *ngIf="stags.length > 0">
 
-              <i> {{day}} </i> <i class="btn btn-sm btn-light fas fa-sync d-flex float-right" style="margin-right: 15px;" (click)="cancel_tags()"> </i>
+              <i> {{day}} </i> <i class="btn btn-sm btn-light fas fa-sync d-flex float-right" style="margin-right: 15px;" (click)="refresh_tags()"> </i>
 
                             </span>
             </div>

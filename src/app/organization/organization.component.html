@@ -31,7 +31,7 @@
     <div class="row">
       <div class="col-md-4">
         <div class="profile-img">
-          <img src="assets/books.jpg" alt="" />
+          <img src="assets/Organization.png" alt="" />
           <!--<div class="file btn btn-lg btn-primary">-->
             <!--Change Photo-->
             <!--<input type="file" name="file" />-->
@@ -42,14 +42,17 @@
       </div>
       <div class="col-md-6">
         <div class="profile-head">
-          <h5>
-            Fiction Addiction Book Club
-          </h5>
-          <h6 class="text-info">
+          <h3>
+            {{user.username}}
+          </h3>
+          <h6 class="text-secondary" *ngIf="!edit">
             <strong>
-            A Club for Bookworms!
+            {{user.specialization}}
             </strong>
           </h6>
+          <div *ngIf="edit" class="form-group">
+            <input type="text" class="form-control"  name="specialization" [(ngModel)]="user.specialization" placeholder="Organization specialization">
+          </div>
 
           <br/>
           <br/>
@@ -95,12 +98,12 @@
 
             <div class="row">
               <div class="col-md-3">
-                <label>OrgName</label>
+                <label>Organization Name</label>
               </div>
               <div class="col-md-9">
-                <p class="text-info" *ngIf="!edit">{{user.username}}</p>
+                <p class="text-info" *ngIf="!edit">{{user.name}}</p>
                 <div *ngIf="edit" class="form-group">
-                  <input type="text" class="form-control"  name="userName" [(ngModel)]="user.username" placeholder="Organization name">
+                  <input type="text" class="form-control"  name="userName" [(ngModel)]="user.name" placeholder="Organization name">
                 </div>
               </div>
             </div>

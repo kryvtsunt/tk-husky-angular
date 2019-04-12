@@ -22,7 +22,7 @@ export class EventComponent implements OnInit {
     private router: Router) { }
 
   eventId: String;
-  event: { isBookmarked: false };
+  event: Event;
   registerBtnText = "Register";
   liked = false;
   bookmarked = false;

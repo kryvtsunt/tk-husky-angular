@@ -179,6 +179,11 @@ export class HomeComponent implements OnInit {
     this.stags.splice(this.stags.indexOf(t), 1);
   }
 
+  refresh_tags(){
+    this.dtags = this.alltags.slice();
+    this.stags = [];
+  }
+
   cancel_tags(){
     this.htags = [];
     this.events = this.all.slice();
