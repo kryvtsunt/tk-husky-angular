@@ -2,7 +2,7 @@ export class Event {
   _id: string;
   name: string;
   desc: string;
-  isBookmarked: boolean
-  start_time: Date
+  isBookmarked: boolean;
+  start_time;
 
 }

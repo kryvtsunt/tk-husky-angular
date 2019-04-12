@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit {
                   const user = new User();
                   user.username = this.username;
                   user.password = this.password;
-                  user.email = this.email;
+                  user.email = this.username + "@husky.neu.edu";
                   console.log(user);
                   this.service.register(user)
                     .then(() => this.router.navigate(['home']));

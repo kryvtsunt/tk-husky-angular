@@ -111,8 +111,8 @@ export class HomeComponent implements OnInit {
 
   search_title() {
     if (this.word == "") return;
-    this.events = this.events.filter(event => event.title !== undefined)
-      .filter(e => e.title.toLowerCase().includes(this.word.toLowerCase()))
+    this.events = this.events.filter(event => event.title !== undefined && event.description !== null)
+      .filter(e => e.title.toLowerCase().includes(this.word.toLowerCase()) || e.description.toLowerCase().includes(this.word.toLowerCase()))
     this.stitle = true;
     this.hword = this.word;
     this.word ="";
