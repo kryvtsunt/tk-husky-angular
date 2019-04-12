@@ -4,6 +4,7 @@ import { UserServiceClient } from '../services/user.service.client';
 import { Router } from '@angular/router';
 import { EventServiceClient } from '../services/event.service.client';
 import { BookmarkServiceClient } from '../services/bookmark.service.client';
+import {User} from "../models/user.model.client";
 
 
 @Component({
@@ -30,7 +31,8 @@ export class HomeComponent implements OnInit {
   hword = "";
   hday: Date;
   htags = [];
-  user : {};
+  user : User;
+  type: string;
 
 
 
@@ -46,9 +48,11 @@ export class HomeComponent implements OnInit {
           } );
 
         });
+        this.day = null;
         console.log(events);
-        this.events = events.slice();
         this.all = events.slice();
+        this.new_events();
+        this.sort_relevance();
         this.dtags = ["Food", "Academia / Education", "Sports", "Social", "Job / Career", "Spiritual / Ethics", "Outdoor", "Music", "Dance", "Art / Design", "Business", "Engineering", "Health / Wellness", "Law / Politics", "Undergraduate", "Graduate", "Culture", "Fundraiser", "Concert / Show", "Games / Entertainment", "Journalism", "Theatre", "Networking", "Cinematography", "Tech / Innovations", "Charity", "Lecture / Talk", "Competition / Contest", "Environment / Sustainability", "Motivation / Inspiration", "Workshop"];
         this.stags = [];
         this.alltags = this.dtags.slice();
@@ -106,6 +110,7 @@ export class HomeComponent implements OnInit {
   }
 
   search_title() {
+    if (this.word == "") return;
     this.events = this.events.filter(event => event.title !== undefined)
       .filter(e => e.title.toLowerCase().includes(this.word.toLowerCase()))
     this.stitle = true;
@@ -124,6 +129,7 @@ export class HomeComponent implements OnInit {
   }
 
   search_tags() {
+    if (this.stags.length <=0) return;
     console.log("search");
     this.events = this.events.filter(event => event.tags !== undefined)
       .filter(e => this.cont(e.tags, this.stags));
@@ -179,18 +185,30 @@ export class HomeComponent implements OnInit {
     this.dtags = this.alltags.slice();
     this.stags = [];
     this.itags = false;
+    this.word = this.hword;
+    this.day = this.hday;
+    this.search_title();
+    this.search_date();
   }
 
   cancel_title() {
     this.events = this.all.slice();
     this.stitle = false;
     this.hword = "";
+    this.stags = this.htags;
+    this.day = this.hday;
+    this.search_tags();
+    this.search_date();
   }
 
   cancel_date() {
     this.events = this.all.slice();
     this.sdate = false;
     this.hday = null;
+    this.word = this.hword;
+    this.stags = this.htags;
+    this.search_title();
+    this.search_tags();
   }
 
   cancel_all(){
@@ -198,14 +216,17 @@ export class HomeComponent implements OnInit {
   }
 
   sort_upcoming(){
+    this.type = "Event Date"
     this.events.sort((e1,e2) => new Date(e1.start_time).getTime() - new Date(e2.start_time).getTime());
   }
 
   sort_post(){
+    this.type = "Post Date"
     this.events.sort((e1,e2) => new Date(e2.last_upd_date).getTime() - new Date(e1.last_upd_date).getTime());
   }
 
   sort_relevance(){
+    this.type = "Relevance"
     this.events.sort((e1,e2) => this.mut(e1.tags, this.user.interests) - this.mut(e2.tags, this.user.interests));
   }
 

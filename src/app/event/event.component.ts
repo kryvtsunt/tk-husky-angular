@@ -29,8 +29,13 @@ export class EventComponent implements OnInit {
   comments = [];
   comment: String;
   user: { username: '', _id:'' };
+  new: boolean;
+  today: Date
+  org: boolean;
 
   ngOnInit() {
+
+    this.today = new Date("2019-04-01");
 
     this.activatedRoute.params.subscribe(params => {
       this.eventId = params['eventId'];
@@ -38,15 +43,19 @@ export class EventComponent implements OnInit {
     console.log(this.eventId);
 
     this.userService.profile().then((user) => {
+        if (user.role == "org") this.org = true
+        else this.org = false
       this.user = user;
     }
     )
     this.eventService.findEvent(this.eventId)
       .then(event => {
+
         this.event = event;
         console.log(this.event);
         this.checkLike();
         this.checkBookmark();
+        this.new = new Date(this.event.start_time).getTime() > this.today.getTime();
       });
 
       this.commentService.findAllComments(this.eventId).then((response)=>{
@@ -77,7 +86,7 @@ export class EventComponent implements OnInit {
 
   deleteComment = (commentObj) => {
 
-   
+
   console.log("in delete")
     this.commentService.deleteComment(this.eventId, this.user._id ,commentObj.comment)
     .then(() => {
@@ -167,6 +176,7 @@ export class EventComponent implements OnInit {
 
     }
   }
+
 
   nallert() {
     alert("The functionality is not implemented yet")

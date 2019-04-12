@@ -45,7 +45,7 @@
         <div class="card-img-overlay" style="padding:0px;">
           <div class="float-right hidden-md-up rounded"
                style="background-color: rgb(240, 241, 242)">
-            <div class="text-center">
+            <div class="text-center" *ngIf="!org">
               <i   [ngClass]="this.bookmarked ? 'btn text-warning fa fa-bookmark fa-3x' : 'btn text-warning far fa-bookmark fa-3x'"
                    (click)="bookmarkEvent()"></i>
               <!-- <i *ngSwitchCase="false" (click)="bookmark()" class="btn text-warning far fa-bookmark fa-2x"></i> -->
@@ -65,7 +65,7 @@
         <!-- <p><strong>User 1:</strong> This seems interesting. </p>
         <p><strong>Ram:</strong> Hi I will attend this event. </p>
         <p> <b id='comments'></b> </p> -->
-        <h2 style="margin-bottom: 15px"> Reviews </h2>
+        <h2 style="margin-bottom: 15px"> Comments </h2>
 
         <div class="input-group">
           <input type='text' class="form-control" id='userInput' name= "comment" [(ngModel)] ="comment" placeholder='Enter Text Here' />
@@ -123,16 +123,29 @@
       </div>
       <div class="card-body">
         <p>Click to find the building ⇒ <a href="https://www.northeastern.edu/campusmap/map/">Campus Map </a></p>
-        <p> <strong>WHERE?</strong> {{event.venue}}
+        <p> <strong>WHERE?</strong> {{event.venue}} | {{event.room}}
         <p> <strong>WHEN?</strong> {{event.start_time | date:'medium'}}
         <!--to {{event.end_time  | date:'medium'}}-->
           <!-- <a href="#" class="btn btn-primary">Read More &rarr;</a> -->
       </div>
       <div class="card-footer" id="register">
 
-        <button class="btn btn-success btn-block" [ngClass]="{'btn-danger': liked}" (click)="registerForEvent(event._id)" >
+        <button *ngIf="new && !org" class="btn btn-success btn-block" [ngClass]="{'btn-danger': liked}" (click)="registerForEvent(event._id)" >
           {{registerBtnText}}
         </button>
+        <button *ngIf="!new && !org" class="btn btn-secondary btn-block" disabled >
+          {{registerBtnText}}
+        </button>
+        <h5 *ngIf="!new && !org" class="text-muted text-center">
+          Event has already passed
+        </h5>
+        <button *ngIf="org" class="btn btn-secondary btn-block" disabled >
+          Register
+        </button>
+        <h5 *ngIf="org" class="text-muted text-center">
+          Organizations cannot register for events
+        </h5>
+
         <br/>
         <!-- <p><img src="img/paw2.jpg" width=20px/> User1
         <p><img src="img/paw2.jpg" width=20px/> User2

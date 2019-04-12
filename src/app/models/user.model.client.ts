@@ -4,6 +4,7 @@ export class User {
   password: string;
   email: string;
   name: string;
-  tags: string[];
+  interests: string[];
   bio: string;
+
 }

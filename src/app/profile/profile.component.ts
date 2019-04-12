@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit {
   stags: String[];
   dtags: String[];
   alltags: String[];
+  today: Date;
 
 
   constructor(private router: Router, private service: UserServiceClient, private userService: UserServiceClient,
@@ -51,6 +52,7 @@ export class ProfileComponent implements OnInit {
     this.dtags = ["Food", "Academia / Education", "Sports", "Social", "Job / Career", "Spiritual / Ethics", "Outdoor", "Music", "Dance", "Art / Design", "Business", "Engineering", "Health / Wellness", "Law / Politics", "Undergraduate", "Graduate", "Culture", "Fundraiser", "Concert / Show", "Games / Entertainment", "Journalism", "Theatre", "Networking", "Cinematography", "Tech / Innovations", "Charity", "Lecture / Talk", "Competition / Contest", "Environment / Sustainability", "Motivation / Inspiration", "Workshop"];
     this.stags = [];
     this.alltags = this.dtags.slice();
+    this.today = new Date("2019-04-01");
     this.service.profile()
       .then(user => {
               this.user = Object.assign({}, user);
@@ -87,8 +89,15 @@ export class ProfileComponent implements OnInit {
 
   }
 
-  setregistered() {
-    this.events = this.registeredEvenets;
+
+  new_events() {
+    this.events = this.registeredEvenets.filter(event => event.event.start_time !== undefined)
+      .filter(e => new Date(e.event.start_time).getTime() > this.today.getTime())
+  }
+
+  old_events() {
+    this.events = this.registeredEvenets.filter(event => event.event.start_time !== undefined)
+      .filter(e => new Date(e.event.start_time).getTime() < this.today.getTime())
   }
 
   editp(){
@@ -125,6 +134,11 @@ export class ProfileComponent implements OnInit {
     this.userService.updateUser(this.user);
     this.edit = !this.edit;
 
+  }
+
+  topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
 
 

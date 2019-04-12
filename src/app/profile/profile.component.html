@@ -215,11 +215,15 @@
     <ul class="nav nav-tabs" id="eventsTab" role="tablist">
       <li class="nav-item">
         <a (click)="setbookmarked()" class="nav-link active"  data-toggle="tab" role="tab"
-           aria-controls="home" aria-selected="true"> <i class="text-warning fa fa-bookmark "></i>  Recently Bookmarked Events</a>
+           aria-controls="home" aria-selected="true"> <i class="text-warning fa fa-bookmark "></i> Bookmarked Events</a>
       </li>
       <li class="nav-item">
-        <a (click)="setregistered()" class="nav-link" data-toggle="tab" role="tab"
-           aria-controls="home" aria-selected="true"> <i class="text-success fas fa-clipboard-check"></i>  Recently Registered Events</a>
+        <a (click)="new_events()" class="nav-link" data-toggle="tab" role="tab"
+           aria-controls="home" aria-selected="true"> <i class="text-success fas fa-clipboard"></i> Registered Events</a>
+      </li>
+      <li class="nav-item">
+        <a (click)="old_events()" class="nav-link" data-toggle="tab" role="tab"
+           aria-controls="home" aria-selected="true"> <i class="text-danger fas fa-clipboard-check"></i> Passed Events</a>
       </li>
     </ul>
     <br />
@@ -244,6 +248,8 @@
 
 
 </div>
+
+<button (click)="topFunction()" id="myBtn" title="Go to top">Top ↑</button>
 
 <footer class="py-5 bg-dark">
   <div class="container">

@@ -3,6 +3,7 @@ import { OrgServiceClient } from '../services/org.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserServiceClient} from "../services/user.service.client";
 import { EventServiceClient } from '../services/event.service.client';
+import {User} from "../models/user.model.client";
 
 @Component({
   selector: 'app-organization',
@@ -18,14 +19,17 @@ export class OrganizationComponent implements OnInit {
 
   orgId : String;
   org: {};
-  user: {};
+  user: User;
   upcomingEvents = [];
   edit = false;
+  today: Date;
+  all = [];
 
   nallert(){
     alert("The functionality is not implemented yet")
   }
   ngOnInit() {
+    this.today = new Date("2019-04-01");
     this.userService.profile().then(user => {
       this.orgId = user._id;
       this.user = user;
@@ -44,9 +48,8 @@ export class OrganizationComponent implements OnInit {
     console.log("inside find all upcoming events")
     this.eventService.findAllEventsForOrg(orgId)
       .then((response) => {
-        console.log("inside find all upcoming events111")
-        console.log(response)
-        this.upcomingEvents = response;
+        this.all = response.slice();
+        this.new_events();
     });
   }
 
@@ -76,5 +79,20 @@ export class OrganizationComponent implements OnInit {
   update(){
   this.userService.updateUser(this.user);
   this.edit = !this.edit;
+  }
+
+  new_events() {
+    this.upcomingEvents = this.all.filter(event => event.start_time !== undefined)
+      .filter(e => new Date(e.start_time).getTime() > this.today.getTime())
+  }
+
+  old_events() {
+    this.upcomingEvents = this.all.filter(event => event.start_time !== undefined)
+      .filter(e => new Date(e.start_time).getTime() < this.today.getTime())
+  }
+
+  topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
 }
