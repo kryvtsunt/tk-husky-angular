@@ -54,7 +54,7 @@ export class EventEditComponent implements OnInit {
       this.eventService.createEvent(toCreateEvent)
         .then(event => {
           console.log(event);
-          this.router.navigate(['home']);
+          this.router.navigate(['organization']);
         });
     });
 
@@ -80,7 +80,7 @@ export class EventEditComponent implements OnInit {
 
       this.eventService.updateEvent(this.eventId, toUpdateEvent)
         .then(event => {
-          this.router.navigate(['home']);
+          this.router.navigate(['organization']);
         });
     });
   }
@@ -166,7 +166,7 @@ export class EventEditComponent implements OnInit {
   }
 
   logout= () => {
-    var r = confirm("Are you sure you want to logout!");
+    var r = confirm("Are you sure you want to logout?");
     if (r == true) {
       this.userService.logout().then(()=> {
         this.router.navigate(['login']);

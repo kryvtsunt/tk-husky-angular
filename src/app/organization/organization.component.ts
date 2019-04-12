@@ -37,7 +37,6 @@ export class OrganizationComponent implements OnInit {
       this.orgService.findorgById(this.orgId)
         .then(org => {
           this.org = org;
-
         });
     });
   }
@@ -54,15 +53,17 @@ export class OrganizationComponent implements OnInit {
   }
 
   confirmDelete = (event) => {
-    console.log("Event Delete", event);
-    this.eventService.deleteEvent(event._id)
-    .then( response => {
-      this.findAllUpcomingEvents(this.orgId);
-    })
+    var r = confirm("Are you sure you want to delete event?");
+    if (r) {
+      this.eventService.deleteEvent(event._id)
+        .then(response => {
+          this.findAllUpcomingEvents(this.orgId);
+        })
+    }
   }
 
   logout= () => {
-    var r = confirm("Are you sure you want to logout!");
+    var r = confirm("Are you sure you want to logout?");
     if (r == true) {
       this.userService.logout().then(()=> {
         this.router.navigate(['login']);

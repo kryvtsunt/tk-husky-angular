@@ -73,7 +73,7 @@
               <input type="radio" name="options" id="option2" autocomplete="off">Upcoming
             </label>
             <label class="btn btn-secondary" (click)="old_events()">
-              <input type="radio" name="options" id="option3" autocomplete="off" >Past
+              <input type="radio" name="options" id="option3" autocomplete="off" >Passsed
             </label>
           </div>
         </div>
@@ -104,7 +104,7 @@
         </div>
         <div class="card-img-overlay" style="padding:0px;">
           <div class="float-right hidden-md-up rounded" style="background-color: rgb(240, 241, 242)">
-            <div class="text-center">
+            <div class="text-center" *ngIf="!org">
               <i
                 [ngClass]="event.isBookmarked ? 'btn text-warning fa fa-bookmark fa-3x' : 'btn text-warning far fa-bookmark fa-3x'"
                 (click)="bookmark(event)"></i>

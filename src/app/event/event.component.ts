@@ -167,7 +167,7 @@ export class EventComponent implements OnInit {
   }
 
   logout = () => {
-    var r = confirm("Are you sure you want to logout!");
+    var r = confirm("Are you sure you want to logout?");
     if (r == true) {
       this.userService.logout().then(() => {
         this.router.navigate(['login']);
@@ -180,5 +180,15 @@ export class EventComponent implements OnInit {
 
   nallert() {
     alert("The functionality is not implemented yet")
+  }
+
+  confirmDelete = (event) => {
+    var r = confirm("Are you sure you want to delete event?");
+    if (r) {
+      this.eventService.deleteEvent(event._id)
+        .then(response => {
+          this.router.navigate(['organization']);
+        })
+    }
   }
 }

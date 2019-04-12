@@ -13,7 +13,10 @@
           <a class="nav-link" routerLink="../../home">Events
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="org">
+          <a class="nav-link" routerLink="../../organization">Profile</a>
+        </li>
+        <li class="nav-item" *ngIf="!org">
           <a class="nav-link" routerLink="../../profile">Profile</a>
         </li>
 
@@ -57,6 +60,11 @@
           <h3 class="card-title">Description</h3>
           <p class="card-text">{{event.description}}</p>
           <!-- <a href="#" class="btn btn-primary">Read More &rarr;</a> -->
+
+          <span class="btn-group float-right" *ngIf="org">
+        <a routerLink="../../event-edit/{{event._id}}" class="btn btn-secondary">Edit</a>
+        <button type="button" (click) ="confirmDelete(event)" class="btn btn-danger">Delete </button>
+        </span>
         </div>
       </div>
 

@@ -22,10 +22,10 @@ export class ProfileComponent implements OnInit {
   follow: boolean;
   routerLink: string;
   edit = false;
-  img: String;
-  stags: String[];
-  dtags: String[];
-  alltags: String[];
+  img: string;
+  stags: string[];
+  dtags: string[];
+  alltags: string[];
   today: Date;
 
 
@@ -105,7 +105,7 @@ export class ProfileComponent implements OnInit {
   }
 
   logout= () => {
-    var r = confirm("Are you sure you want to logout!");
+    var r = confirm("Are you sure you want to logout?");
     if (r == true) {
       this.userService.logout().then(()=> {
         this.router.navigate(['login']);
