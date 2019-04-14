@@ -12,20 +12,20 @@ import {UserServiceClient} from "../services/user.service.client";
 })
 export class EventEditComponent implements OnInit {
 
-  eventId: String;
-  event_name: String = "";
-  event_description: String = "";
-  event_location: String = "";
-  event_room: String = "";
-  event_directions: String = "";
-  start_date: String = "";
-  end_date: String = "";
-  start_time: String = "";
-  end_time: String = "";
-  img: String = "";
-  stags: String[];
-  dtags: String[];
-  alltags: String[];
+  eventId: string;
+  event_name: string = "";
+  event_description: string = "";
+  event_location: string = "";
+  event_room: string = "";
+  event_directions: string = "";
+  start_date: string = "";
+  end_date: string = "";
+  start_time: string = "";
+  end_time: string = "";
+  img: string = "";
+  stags: string[];
+  dtags: string[];
+  alltags: string[];
   editEvent: boolean;
   alert: boolean;
   alert2: boolean;
@@ -45,7 +45,7 @@ export class EventEditComponent implements OnInit {
     } else {
       this.alert = false;
     }
-    if (new Date(this.start_date).getTime() < this.today){
+    if (new Date(this.start_date).getTime() < this.today.getTime()){
       this.alert2 = true;
       return;
     } else {
@@ -83,7 +83,7 @@ export class EventEditComponent implements OnInit {
     } else {
       this.alert = false;
     }
-    if (new Date(this.start_date).getTime() < this.today){
+    if (new Date(this.start_date).getTime() < this.today.getTime()){
       this.alert2 = true;
       return;
     } else {
