@@ -13,20 +13,24 @@ import {UserServiceClient} from "../services/user.service.client";
 export class EventEditComponent implements OnInit {
 
   eventId: String;
-  event_name: String;
-  event_description: String;
-  event_location: String;
-  event_room: String;
-  event_directions: String;
-  start_date: String;
-  end_date: String;
-  start_time: String;
-  end_time: String;
-  img: String;
+  event_name: String = "";
+  event_description: String = "";
+  event_location: String = "";
+  event_room: String = "";
+  event_directions: String = "";
+  start_date: String = "";
+  end_date: String = "";
+  start_time: String = "";
+  end_time: String = "";
+  img: String = "";
   stags: String[];
   dtags: String[];
   alltags: String[];
   editEvent: boolean;
+  alert: boolean;
+  alert2: boolean;
+
+  today: Date;
 
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
@@ -35,6 +39,18 @@ export class EventEditComponent implements OnInit {
 
 
   postEvent() {
+    if (this.event_name == "" || this.event_description == "" || this.start_time == "" || this.event_location == "" || this.start_date == "") {
+      this.alert = true;
+      return;
+    } else {
+      this.alert = false;
+    }
+    if (new Date(this.start_date).getTime() < this.today){
+      this.alert2 = true;
+      return;
+    } else {
+      this.alert2 = false;
+    }
     this.userService.profile().then(user => {
       var toCreateEvent = {
         title: this.event_name,
@@ -61,7 +77,18 @@ export class EventEditComponent implements OnInit {
   }
 
   updateEvent() {
-    console.log("inside updateEvent");
+    if (this.event_name == "" || this.event_description == "" || this.start_time == "" || this.event_location == "" || this.start_date == "") {
+      this.alert = true;
+      return;
+    } else {
+      this.alert = false;
+    }
+    if (new Date(this.start_date).getTime() < this.today){
+      this.alert2 = true;
+      return;
+    } else {
+      this.alert2 = false;
+    }
     this.userService.profile().then(user => {
       var toUpdateEvent = {
         title: this.event_name,
@@ -102,6 +129,7 @@ export class EventEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.today = new Date("2019-04-01");
     this.img = "./assets/library.jpeg"
     this.dtags = ["Food", "Academia / Education", "Sports", "Social", "Job / Career", "Spiritual / Ethics", "Outdoor", "Music", "Dance", "Art / Design", "Business", "Engineering", "Health / Wellness", "Law / Politics", "Undergraduate", "Graduate", "Culture", "Fundraiser", "Concert / Show", "Games / Entertainment", "Journalism", "Theatre", "Networking", "Cinematography", "Tech / Innovations", "Charity", "Lecture / Talk", "Competition / Contest", "Environment / Sustainability", "Motivation / Inspiration", "Workshop"];
     this.stags = [];
@@ -177,6 +205,7 @@ export class EventEditComponent implements OnInit {
   }
 
   to_stags(t){
+    if (this.stags.length >= 5) return;
     this.stags.push(t);
     this.dtags.splice(this.dtags.indexOf(t), 1);
   }

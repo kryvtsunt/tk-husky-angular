@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.today = new Date("2019-04-01");
+    this.type = "None";
     this.eventService.findAllEvents()
       .then(events => {
 
@@ -231,7 +232,8 @@ export class HomeComponent implements OnInit {
   }
 
   sort_relevance(){
-    this.type = "Relevance"
+    if (this.user.interests.length <= 0) return;
+    this.type = "Relevance";
     this.events.sort((e1,e2) => this.mut(e1.tags, this.user.interests) - this.mut(e2.tags, this.user.interests));
   }
 
@@ -247,6 +249,7 @@ export class HomeComponent implements OnInit {
 
   refresh_events(){
     this.events = this.all.slice();
+    this.type="None";
   }
 
 

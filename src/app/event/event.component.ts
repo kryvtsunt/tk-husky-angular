@@ -55,7 +55,7 @@ export class EventComponent implements OnInit {
         console.log(this.event);
         this.checkLike();
         this.checkBookmark();
-        this.new = new Date(this.event.start_time).getTime() > this.today.getTime();
+        this.new = new Date(event.start_time).getTime() > this.today.getTime();
       });
 
       this.commentService.findAllComments(this.eventId).then((response)=>{

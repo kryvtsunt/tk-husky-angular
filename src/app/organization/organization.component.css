@@ -80,7 +80,7 @@ body{
   width: 70%;
   padding: 2%;
   font-weight: 600;
-  color: #007d09;
+  color: #28a745;
   cursor: pointer;
 }
 
@@ -90,7 +90,7 @@ body{
   width: 70%;
   padding: 2%;
   font-weight: 600;
-  color: #7d0005;
+  color: #dc3545;
   cursor: pointer;
   margin-top: 10px
 }

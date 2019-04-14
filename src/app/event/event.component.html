@@ -66,6 +66,10 @@
         <button type="button" (click) ="confirmDelete(event)" class="btn btn-danger">Delete </button>
         </span>
         </div>
+        <div class="card-footer text-muted">
+          Last updated on {{event.last_upd_date | date:'short'}} by
+          <strong>Test Organization</strong>
+        </div>
       </div>
 
       <div>
@@ -131,9 +135,11 @@
       </div>
       <div class="card-body">
         <p>Click to find the building ⇒ <a href="https://www.northeastern.edu/campusmap/map/">Campus Map </a></p>
-        <p> <strong>WHERE?</strong> {{event.venue}} | {{event.room}}
-        <p> <strong>WHEN?</strong> {{event.start_time | date:'medium'}}
-        <!--to {{event.end_time  | date:'medium'}}-->
+        <p> <strong>WHEN: </strong> {{event.start_time | date:'medium'}}
+        <p> <strong>WHERE: </strong> {{event.venue}} | {{event.room}}
+        <p *ngIf="event.directions"> <strong>DIRECTIONS: </strong> {{event.directions}}
+
+          <!--to {{event.end_time  | date:'medium'}}-->
           <!-- <a href="#" class="btn btn-primary">Read More &rarr;</a> -->
       </div>
       <div class="card-footer" id="register">

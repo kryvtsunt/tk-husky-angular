@@ -58,7 +58,8 @@
           Sort by: {{type}}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <button class="dropdown-item" (click)="sort_relevance()">Relevance (Interesting first)</button>
+          <button *ngIf="user.interests.length > 0" class="dropdown-item" (click)="sort_relevance()">Relevance (Interesting first)</button>
+          <button *ngIf="user.interests.length <= 0" class="dropdown-item" (click)="sort_relevance()" disabled>Relevance (Interesting first)</button>
           <button class="dropdown-item" (click)="sort_upcoming()">Event Date (Upcoming first)</button>
           <button class="dropdown-item" (click)="sort_post()">Post Date (New first)</button>
         </div>
@@ -73,7 +74,7 @@
               <input type="radio" name="options" id="option2" autocomplete="off">Upcoming
             </label>
             <label class="btn btn-secondary" (click)="old_events()">
-              <input type="radio" name="options" id="option3" autocomplete="off" >Passsed
+              <input type="radio" name="options" id="option3" autocomplete="off" >Past
             </label>
           </div>
         </div>
@@ -124,8 +125,8 @@
         </div>
 
         <div class="card card-footer text-muted">
-          Posted on {{event.last_upd_date | date:'medium'}} by
-          <a href="./organization.html">Fiction Addiction Book Club</a>
+          Last updated on {{event.last_upd_date | date:'short'}} by
+          <strong>Test Organization</strong>
         </div>
       </div>
 
@@ -228,12 +229,12 @@
 
 
         <!-- Side Widget -->
-      <div class="card my-4">
-        <h5 class="card-header">Help (temporary)</h5>
-        <div class="card-body">
-          This is the page to search events
-        </div>
-      </div>
+      <!--<div class="card my-4">-->
+        <!--<h5 class="card-header">Help</h5>-->
+        <!--<div class="card-body">-->
+          <!--This is the page to search events-->
+        <!--</div>-->
+      <!--</div>-->
 
 
     </div>

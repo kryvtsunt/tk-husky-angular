@@ -24,6 +24,7 @@ export class OrganizationComponent implements OnInit {
   edit = false;
   today: Date;
   all = [];
+  type: string;
 
   nallert(){
     alert("The functionality is not implemented yet")
@@ -33,7 +34,7 @@ export class OrganizationComponent implements OnInit {
     this.userService.profile().then(user => {
       this.orgId = user._id;
       this.user = user;
-      this.findAllUpcomingEvents(this.orgId);
+      this.findAllUpcomingEvents(this.orgId).then(() => this.new_events());
       this.orgService.findorgById(this.orgId)
         .then(org => {
           this.org = org;
@@ -44,20 +45,22 @@ export class OrganizationComponent implements OnInit {
   //upcoming Events
 
   findAllUpcomingEvents(orgId){
-    console.log("inside find all upcoming events")
-    this.eventService.findAllEventsForOrg(orgId)
+    return this.eventService.findAllEventsForOrg(orgId)
       .then((response) => {
         this.all = response.slice();
-        this.new_events();
-    });
+      });
   }
+
 
   confirmDelete = (event) => {
     var r = confirm("Are you sure you want to delete event?");
     if (r) {
       this.eventService.deleteEvent(event._id)
         .then(response => {
-          this.findAllUpcomingEvents(this.orgId);
+          this.findAllUpcomingEvents(this.orgId).then(() => {
+            if (this.type == "old") this.old_events();
+            else this.new_events();
+          });
         })
     }
   }
@@ -86,11 +89,14 @@ export class OrganizationComponent implements OnInit {
   new_events() {
     this.upcomingEvents = this.all.filter(event => event.start_time !== undefined)
       .filter(e => new Date(e.start_time).getTime() > this.today.getTime())
+    this.type = "new";
+
   }
 
   old_events() {
     this.upcomingEvents = this.all.filter(event => event.start_time !== undefined)
-      .filter(e => new Date(e.start_time).getTime() < this.today.getTime())
+      .filter(e => new Date(e.start_time).getTime() < this.today.getTime());
+    this.type = "old";
   }
 
   topFunction() {

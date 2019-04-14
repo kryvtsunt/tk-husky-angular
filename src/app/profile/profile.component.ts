@@ -120,6 +120,7 @@ export class ProfileComponent implements OnInit {
   }
 
   to_stags(t){
+    if (this.stags.length >= 5) return;
     this.stags.push(t);
     this.dtags.splice(this.dtags.indexOf(t), 1);
   }

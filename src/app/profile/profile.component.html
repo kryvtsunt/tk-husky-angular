@@ -89,8 +89,11 @@
 
           <p>INTERESTS</p>
 
-          <div *ngIf="user.interests.length <= 0 || stags.length <= 0" class="alert alert-warning" role="alert">
+          <div *ngIf="(user.interests.length <= 0 || stags.length <= 0) && !edit" class="alert alert-warning" role="alert">
             You don't have any interests!
+          </div>
+          <div *ngIf="stags.length >= 5 && edit" class="alert alert-warning" role="alert">
+            You've reached the upper-bound (5 tags maximum).
           </div>
 
 
@@ -223,7 +226,7 @@
       </li>
       <li class="nav-item">
         <a (click)="old_events()" class="nav-link" data-toggle="tab" role="tab"
-           aria-controls="home" aria-selected="true"> <i class="text-danger fas fa-clipboard-check"></i> Passed Events</a>
+           aria-controls="home" aria-selected="true"> <i class="text-danger fas fa-clipboard-check"></i> Past Events</a>
       </li>
     </ul>
     <br />
@@ -237,6 +240,7 @@
 
           <div class="card-body col-9">
             <h5 class="card-title">{{event.event.title}}</h5>
+            <h6> {{event.event.start_time | date:'medium' }}</h6>
             <p class="card-text">{{event.event.description.substring(0,200)}}...</p>
             <a routerLink="../event/{{event.event._id}}" class="btn-block btn btn-primary">View</a>
           </div>
