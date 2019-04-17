@@ -27,6 +27,9 @@ export class ProfileComponent implements OnInit {
   dtags: string[];
   alltags: string[];
   today: Date;
+  vpassword: string;
+  password: string;
+  error: boolean;
 
 
   constructor(private router: Router, private service: UserServiceClient, private userService: UserServiceClient,
@@ -62,6 +65,7 @@ export class ProfileComponent implements OnInit {
               } else {
                 this.admin = false;
               }
+              this.vpassword = "";
               this.findAllBookmarkedEvents();
               this.findAllRegisteredEvents();
       })
@@ -131,6 +135,11 @@ export class ProfileComponent implements OnInit {
   }
 
   update(){
+    if (this.vpassword != this.password){
+      this.error = true;
+      return;
+    }
+    this.user.password = this.vpassword;
     this.user.interests = this.stags.slice();
     this.userService.updateUser(this.user);
     this.edit = !this.edit;

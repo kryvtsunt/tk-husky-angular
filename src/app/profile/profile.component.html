@@ -28,7 +28,7 @@
 </nav>
 
 
-<div class="container emp-profile">
+<div class="container eprof">
 
   <div *ngIf="user.interests.length <= 0" class="alert alert-info alert-dismissible fade show" role="alert">
     <strong> NB: </strong>   We will help you to find events faster if you tell us about your interests! Press 'Edit Profile' to add interests.
@@ -37,10 +37,17 @@
     </button>
   </div>
 
+  <div *ngIf="error" class="alert alert-danger fade show" role="alert">
+    Passwords should match
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
   <form method="post">
     <div class="row">
       <div class="col-md-4">
-        <div class="profile-img">
+        <div class="org-img">
           <img src="./assets/1600.png" alt=""/>
           <div *ngIf="edit" class="file btn btn-lg btn-primary" (click)="editp()">
             Change Photo
@@ -83,7 +90,7 @@
     </div>
     <div class="row">
       <div class="col-md-4">
-        <div class="profile-work">
+        <div class="profile-side">
           <!-- <a href="./organization.html" class="btn btn-block btn-primary text-white"> Manage organization </a> -->
 
 
@@ -191,7 +198,7 @@
               </div>
               <div class="col-md-9">
                 <div  class="form-group">
-                  <input  class="form-control" name="password" placeholder="qwerty123" [(ngModel)]="user.password" >
+                  <input  class="form-control" name="password" placeholder="qwerty123" [(ngModel)]="password" >
                 </div>
               </div>
             </div>
@@ -202,7 +209,7 @@
               </div>
               <div class="col-md-9">
                 <div  class="form-group">
-                  <input  class="form-control" name="vpassword" placeholder="qwerty123" [(ngModel)]="user.password">
+                  <input  class="form-control" name="vpassword" placeholder="qwerty123" [(ngModel)]="vpassword">
                 </div>
               </div>
             </div>
@@ -253,7 +260,7 @@
 
 </div>
 
-<button (click)="topFunction()" id="myBtn" title="Go to top">Top ↑</button>
+<button (click)="topFunction()" id="topBtn" title="Go to top">Top ↑</button>
 
 <footer class="py-5 bg-dark">
   <div class="container">

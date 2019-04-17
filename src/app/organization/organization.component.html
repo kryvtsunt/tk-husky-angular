@@ -26,11 +26,20 @@
   </div>
 </nav>
 
-<div class="container emp-profile">
+<div class="container eprof">
+
+
+  <div *ngIf="error" class="alert alert-danger fade show" role="alert">
+    Passwords should match
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  
   <form method="post">
     <div class="row">
       <div class="col-md-4">
-        <div class="profile-img">
+        <div class="org-img">
           <img src="assets/Organization.png" alt="" />
           <!--<div class="file btn btn-lg btn-primary">-->
             <!--Change Photo-->
@@ -78,7 +87,7 @@
     </div>
     <div class="row">
       <div class="col-md-4">
-        <div class="profile-work">
+        <div class="profile-side">
           <div style="word-break: break-all; word-wrap: break-word;">
             <p>WEBSITE</p>
             <div *ngIf="!edit" ><a
@@ -148,7 +157,7 @@
               </div>
               <div class="col-md-9">
                 <div  class="form-group">
-                  <input  class="form-control" name="password" placeholder="qwerty123" [(ngModel)]="user.password" >
+                  <input  class="form-control" name="password" placeholder="qwerty123" [(ngModel)]="password" >
                 </div>
               </div>
             </div>
@@ -159,7 +168,7 @@
               </div>
               <div class="col-md-9">
                 <div  class="form-group">
-                  <input  class="form-control" name="vpassword" placeholder="qwerty123" [(ngModel)]="user.password">
+                  <input  class="form-control" name="vpassword" placeholder="qwerty123" [(ngModel)]="vpassword">
                 </div>
               </div>
             </div>
@@ -205,7 +214,7 @@
     </div>
   </form>
 </div>
-<button (click)="topFunction()" id="myBtn" title="Go to top">Top ↑</button>
+<button (click)="topFunction()" id="topBtn" title="Go to top">Top ↑</button>
 <footer class="py-5 bg-dark">
   <div class="container">
     <p class="m-0 text-center text-white">@Husky Neighborhood 2019</p>

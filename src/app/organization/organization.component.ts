@@ -25,6 +25,9 @@ export class OrganizationComponent implements OnInit {
   today: Date;
   all = [];
   type: string;
+  vpassword: string;
+  password: string;
+  error: boolean;
 
   nallert(){
     alert("The functionality is not implemented yet")
@@ -82,6 +85,11 @@ export class OrganizationComponent implements OnInit {
   }
 
   update(){
+    if (this.vpassword != this.password){
+      this.error = true;
+      return;
+    }
+    this.user.password = this.vpassword;
   this.userService.updateUser(this.user);
   this.edit = !this.edit;
   }
